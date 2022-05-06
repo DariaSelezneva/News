@@ -20,6 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow camera usage to be able to take photos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow access to photo library to be able to share photos</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -46,9 +50,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>Allow camera usage to be able to take photos</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow access to photo library to be able to share photos</string>
 </dict>
 </plist>

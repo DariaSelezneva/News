@@ -12,6 +12,9 @@
 		6EBB93456A9CEDD8A9C618D1 /* Pods_News_NewsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42BE25F23FDF60C8DB495A4C /* Pods_News_NewsUITests.framework */; };
 		99A0260D2822BBB300513B8D /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A026042822BBB300513B8D /* API.swift */; };
 		99A0260E2822BBB300513B8D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A026072822BBB300513B8D /* LoginView.swift */; };
+		99A34FDA2824FFC20010BB43 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A34FD92824FFC20010BB43 /* PhotoPickerView.swift */; };
+		99A34FDF2825108D0010BB43 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A34FDE2825108D0010BB43 /* ImagePicker.swift */; };
+		99A34FE52825568F0010BB43 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A34FE42825568F0010BB43 /* NewsCell.swift */; };
 		99E3EA422823C0C200068312 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA412823C0C200068312 /* User.swift */; };
 		99E3EA442823C13B00068312 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA432823C13B00068312 /* UserResponse.swift */; };
 		99E3EA462823C28400068312 /* GetNewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA452823C28400068312 /* GetNewsResponse.swift */; };
@@ -68,6 +71,9 @@
 		8149981D0504024BCD50A152 /* Pods-News.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-News.debug.xcconfig"; path = "Target Support Files/Pods-News/Pods-News.debug.xcconfig"; sourceTree = "<group>"; };
 		99A026042822BBB300513B8D /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		99A026072822BBB300513B8D /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		99A34FD92824FFC20010BB43 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
+		99A34FDE2825108D0010BB43 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		99A34FE42825568F0010BB43 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		99E3EA412823C0C200068312 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		99E3EA432823C13B00068312 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		99E3EA452823C28400068312 /* GetNewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNewsResponse.swift; sourceTree = "<group>"; };
@@ -203,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				99E3EA5C2823F0D600068312 /* MainView.swift */,
+				99A34FDD2825107B0010BB43 /* Common views */,
 				99E3EA532823E70A00068312 /* LoginRegister */,
 				99E3EA5A2823F05600068312 /* News */,
 				99E3EA5B2823F0BD00068312 /* User */,
@@ -210,9 +217,26 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		99A34FD82824FF9B0010BB43 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				99A34FD92824FFC20010BB43 /* PhotoPickerView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		99A34FDD2825107B0010BB43 /* Common views */ = {
+			isa = PBXGroup;
+			children = (
+				99A34FDE2825108D0010BB43 /* ImagePicker.swift */,
+			);
+			path = "Common views";
+			sourceTree = "<group>";
+		};
 		99E3EA532823E70A00068312 /* LoginRegister */ = {
 			isa = PBXGroup;
 			children = (
+				99A34FD82824FF9B0010BB43 /* Subviews */,
 				99E3EA552823E74E00068312 /* RegisterView.swift */,
 				99A026072822BBB300513B8D /* LoginView.swift */,
 			);
@@ -231,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				99E3EA5E2823F11400068312 /* NewsListView.swift */,
+				99A34FE42825568F0010BB43 /* NewsCell.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -546,14 +571,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				99A0260D2822BBB300513B8D /* API.swift in Sources */,
+				99A34FE52825568F0010BB43 /* NewsCell.swift in Sources */,
 				99E3EA5D2823F0D600068312 /* MainView.swift in Sources */,
 				99E3EA562823E74E00068312 /* RegisterView.swift in Sources */,
+				99A34FDF2825108D0010BB43 /* ImagePicker.swift in Sources */,
 				99E3EA612823F12100068312 /* UserView.swift in Sources */,
 				99A0260E2822BBB300513B8D /* LoginView.swift in Sources */,
 				99E3EA4A2823CAF500068312 /* Post.swift in Sources */,
 				99E3EA422823C0C200068312 /* User.swift in Sources */,
 				99E3EA652823F5B700068312 /* RegisterViewModel.swift in Sources */,
 				99E3EA502823D16D00068312 /* FindNewsResponse.swift in Sources */,
+				99A34FDA2824FFC20010BB43 /* PhotoPickerView.swift in Sources */,
 				99E3EA672823F5C000068312 /* NewsViewModel.swift in Sources */,
 				99E3EA6D2823F5DD00068312 /* RegisterRepository.swift in Sources */,
 				99E3EA5F2823F11400068312 /* NewsListView.swift in Sources */,
@@ -655,7 +683,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -710,7 +738,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -731,12 +759,12 @@
 				DEVELOPMENT_TEAM = 59WCXNPN4U;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = News/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = DariaSelezneva.News;
+				PRODUCT_BUNDLE_IDENTIFIER = DSelezneva.News;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -754,12 +782,12 @@
 				DEVELOPMENT_TEAM = 59WCXNPN4U;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = News/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = DariaSelezneva.News;
+				PRODUCT_BUNDLE_IDENTIFIER = DSelezneva.News;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

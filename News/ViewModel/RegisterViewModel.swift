@@ -6,3 +6,15 @@
 //
 
 import Foundation
+import UIKit
+
+protocol RegisterBusinessLogic {
+    func register(avatar: UIImage, email: String, name: String, password: String)
+}
+
+class RegisterViewModel: RegisterBusinessLogic {
+    
+    func register(avatar: UIImage, email: String, name: String, password: String) {
+        
+    }
+}

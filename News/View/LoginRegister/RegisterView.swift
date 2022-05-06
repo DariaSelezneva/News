@@ -6,45 +6,44 @@
 //
 
 import SwiftUI
-import Photos
 
-@available(iOS 15.0, *)
+
 struct RegisterView: View {
     
-    @State private var showsPhotoOptions: Bool = false
+    let viewModel: RegisterBusinessLogic = RegisterViewModel()
+    
+    @State var selectedImage: UIImage = UIImage(named: "user-placeholder")!
+    
+    @State private var email: String = ""
+    @State private var password: String = ""
+    @State private var confirmPassword: String = ""
+    @State private var name: String = ""
     
     var body: some View {
-        VStack {
-            Image("user-placeholder")
-                .frame(width: 120, height: 120)
-                .clipShape(Circle())
-            Button("Upload photo") {
-                showsPhotoOptions = true
+        VStack(spacing: 30) {
+            PhotoPickerView(selectedImage: $selectedImage)
+            TextField("Name", text: $name)
+                .withBackground()
+            TextField("Email", text: $email)
+                .withBackground()
+            VStack {
+                TextField("Password", text: $password)
+                    .withBackground()
+                TextField("Confirm password", text: $confirmPassword)
+                    .withBackground()
             }
+            Button("Register") {
+                viewModel.register(avatar: selectedImage, email: email, name: name, password: password)
+            }
+            .foregroundColor(.white)
+            .frame(width: 150, height: 50)
+            .background(RoundedRectangle(cornerRadius: 12).fill(Color.blue))
         }
-        .confirmationDialog("Select source", isPresented: $showsPhotoOptions) {
-            Button("Take a photo") {
-                // ask for camera usage permission
-            }
-            Button("Choose from library") {
-                // ask for photos access permission
-                let photosPermissionStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
-                if photosPermissionStatus == .notDetermined {
-                    PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
-                        if status == .authorized {
-                            
-                        }
-                        else {
-                            // show alert to settings
-                        }
-                    }
-                }
-            }
-        }
+        .padding()
     }
 }
 
-@available(iOS 15.0, *)
+
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
         RegisterView()

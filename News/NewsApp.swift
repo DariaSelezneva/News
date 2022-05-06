@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct NewsApp: App {
+    
+    let version = UIDevice.current.systemVersion
     var body: some Scene {
         WindowGroup {
            LoginView()

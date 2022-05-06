@@ -9,8 +9,6 @@ import SwiftUI
 
 struct MainView: View {
     
-    @AppStorage("token") var token: String = ""
-    
     var body: some View {
         ZStack {
             TabView {
@@ -20,11 +18,8 @@ struct MainView: View {
                     }
                 UserView()
                     .tabItem {
-                        Label("Settings", systemImage: "person.fill")
+                        Label("Profile", systemImage: "person.fill")
                     }
-            }
-            if token.isEmpty {
-                LoginView()
             }
         }
     }
