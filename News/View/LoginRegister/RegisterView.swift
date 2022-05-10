@@ -19,6 +19,8 @@ struct RegisterView: View {
     @State private var confirmPassword: String = ""
     @State private var name: String = ""
     
+    @State private var showsPassword: Bool = false
+    
     var body: some View {
         VStack(spacing: 30) {
             PhotoPickerView(selectedImage: $selectedImage)
@@ -27,10 +29,8 @@ struct RegisterView: View {
             TextField("Email", text: $email)
                 .withBackground()
             VStack {
-                TextField("Password", text: $password)
-                    .withBackground()
-                TextField("Confirm password", text: $confirmPassword)
-                    .withBackground()
+                SecureTextField(title: "Password", text: $password, showsPassword: $showsPassword)
+                SecureTextField(title: "Confirm password", text: $confirmPassword, showsPassword: $showsPassword)
             }
             Button("Register") {
                 viewModel.register(avatar: selectedImage, email: email, name: name, password: password)

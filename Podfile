@@ -1,11 +1,11 @@
 
-platform :ios, '9.0'
+platform :ios, '13.0'
 
 target 'News' do
   use_frameworks!
 
   # Pods for News
-pod 'Alamofire'
+pod 'Alamofire', '~> 5.0'
 pod 'Swinject'
 
   target 'NewsTests' do

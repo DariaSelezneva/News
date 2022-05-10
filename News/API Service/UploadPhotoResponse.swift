@@ -9,7 +9,7 @@ import Foundation
 
 struct UploadPhotoResponse: Decodable {
     
-    var url: String
+    var data: String
     var statusCode: Int
     var success: Bool
         

@@ -6,3 +6,19 @@
 //
 
 import Foundation
+import Alamofire
+
+protocol NewsRepositoryLogic {
+    
+}
+
+class NewsRepository {
+    
+    static func getNews(page: Int, perPage: Int) {
+        AF.request(API.getNewsURL(page: page, perPage: perPage))
+            .validate()
+            .responseJSON { data in
+                print(data)
+            }
+    }
+}

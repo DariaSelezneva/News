@@ -9,7 +9,7 @@ import Foundation
 
 struct UserResponse {
     
-    var id: Int
+    var id: String
     var avatar: String
     var email: String
     var name: String
@@ -30,7 +30,7 @@ extension UserResponse: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: RootCodingKeys.self)
         let data = try container.nestedContainer(keyedBy: DataCodingKeys.self, forKey: .data)
-        id = try data.decode(Int.self, forKey: .id)
+        id = try data.decode(String.self, forKey: .id)
         avatar = try data.decode(String.self, forKey: .avatar)
         email = try data.decode(String.self, forKey: .email)
         name = try data.decode(String.self, forKey: .name)

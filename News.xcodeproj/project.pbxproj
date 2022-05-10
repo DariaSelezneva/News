@@ -41,6 +41,11 @@
 		99FCBAFC28227DA800BA60DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99FCBAFB28227DA800BA60DA /* Preview Assets.xcassets */; };
 		99FCBB0728227DA800BA60DA /* NewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCBB0628227DA800BA60DA /* NewsTests.swift */; };
 		99FCBB1228227DA800BA60DA /* NewsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCBB1128227DA800BA60DA /* NewsUITests.swift */; };
+		DA841C7C282A99DE0023C582 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA841C7B282A99DE0023C582 /* AuthResponse.swift */; };
+		DA841C7E282AB06C0023C582 /* SecureTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA841C7D282AB06C0023C582 /* SecureTextField.swift */; };
+		DA841C80282AB1E00023C582 /* BlueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA841C7F282AB1E00023C582 /* BlueButton.swift */; };
+		DAEEEE2728296A8E00BD13C3 /* RegistrationBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEEEE2628296A8E00BD13C3 /* RegistrationBody.swift */; };
+		DAEEEE2928296B6000BD13C3 /* LoginBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEEEE2828296B6000BD13C3 /* LoginBody.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +112,11 @@
 		99FCBB1128227DA800BA60DA /* NewsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsUITests.swift; sourceTree = "<group>"; };
 		99FCBB1328227DA800BA60DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE9BE3F17B996873A7EAA096 /* Pods_NewsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NewsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA841C7B282A99DE0023C582 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		DA841C7D282AB06C0023C582 /* SecureTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTextField.swift; sourceTree = "<group>"; };
+		DA841C7F282AB1E00023C582 /* BlueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueButton.swift; sourceTree = "<group>"; };
+		DAEEEE2628296A8E00BD13C3 /* RegistrationBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationBody.swift; sourceTree = "<group>"; };
+		DAEEEE2828296B6000BD13C3 /* LoginBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginBody.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +196,9 @@
 			isa = PBXGroup;
 			children = (
 				99A026042822BBB300513B8D /* API.swift */,
+				DAEEEE2828296B6000BD13C3 /* LoginBody.swift */,
+				DAEEEE2628296A8E00BD13C3 /* RegistrationBody.swift */,
+				DA841C7B282A99DE0023C582 /* AuthResponse.swift */,
 				99E3EA432823C13B00068312 /* UserResponse.swift */,
 				99E3EA512823D24100068312 /* TokenResponse.swift */,
 				99E3EA4D2823CE4D00068312 /* UploadPhotoResponse.swift */,
@@ -229,6 +242,8 @@
 			isa = PBXGroup;
 			children = (
 				99A34FDE2825108D0010BB43 /* ImagePicker.swift */,
+				DA841C7D282AB06C0023C582 /* SecureTextField.swift */,
+				DA841C7F282AB1E00023C582 /* BlueButton.swift */,
 			);
 			path = "Common views";
 			sourceTree = "<group>";
@@ -576,19 +591,24 @@
 				99E3EA562823E74E00068312 /* RegisterView.swift in Sources */,
 				99A34FDF2825108D0010BB43 /* ImagePicker.swift in Sources */,
 				99E3EA612823F12100068312 /* UserView.swift in Sources */,
+				DAEEEE2728296A8E00BD13C3 /* RegistrationBody.swift in Sources */,
 				99A0260E2822BBB300513B8D /* LoginView.swift in Sources */,
 				99E3EA4A2823CAF500068312 /* Post.swift in Sources */,
+				DA841C7C282A99DE0023C582 /* AuthResponse.swift in Sources */,
 				99E3EA422823C0C200068312 /* User.swift in Sources */,
 				99E3EA652823F5B700068312 /* RegisterViewModel.swift in Sources */,
 				99E3EA502823D16D00068312 /* FindNewsResponse.swift in Sources */,
 				99A34FDA2824FFC20010BB43 /* PhotoPickerView.swift in Sources */,
 				99E3EA672823F5C000068312 /* NewsViewModel.swift in Sources */,
+				DA841C80282AB1E00023C582 /* BlueButton.swift in Sources */,
+				DA841C7E282AB06C0023C582 /* SecureTextField.swift in Sources */,
 				99E3EA6D2823F5DD00068312 /* RegisterRepository.swift in Sources */,
 				99E3EA5F2823F11400068312 /* NewsListView.swift in Sources */,
 				99E3EA4E2823CE4D00068312 /* UploadPhotoResponse.swift in Sources */,
 				99E3EA632823F59900068312 /* LoginViewModel.swift in Sources */,
 				99E3EA712823F5F500068312 /* UserRepository.swift in Sources */,
 				99E3EA692823F5C800068312 /* UserViewModel.swift in Sources */,
+				DAEEEE2928296B6000BD13C3 /* LoginBody.swift in Sources */,
 				99FCBAF528227DA700BA60DA /* NewsApp.swift in Sources */,
 				99E3EA6F2823F5EC00068312 /* NewsRepository.swift in Sources */,
 				99E3EA592823E90000068312 /* e_TextField.swift in Sources */,
@@ -683,7 +703,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -738,7 +758,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -759,7 +779,7 @@
 				DEVELOPMENT_TEAM = 59WCXNPN4U;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = News/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -782,7 +802,7 @@
 				DEVELOPMENT_TEAM = 59WCXNPN4U;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = News/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

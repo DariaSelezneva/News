@@ -27,3 +27,10 @@ extension TextField {
         modifier(RoundedBackground())
     }
 }
+
+extension SecureField {
+    
+    func withBackground() -> some View {
+        modifier(RoundedBackground())
+    }
+}

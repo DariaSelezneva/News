@@ -33,14 +33,14 @@ struct PhotoPickerView: View {
                     Button("Camera") {
                         showsCamera = true
                     }
-                    .buttonStyle(.borderedProminent)
+                    .buttonStyle(BlueButton())
                     .sheet(isPresented: $showsCamera) {
                         ImagePicker(sourceType: .camera, selectedImage: $selectedImage)
                     }
                     Button("Library") {
                         showsLibrary = true
                     }
-                    .buttonStyle(.borderedProminent)
+                    .buttonStyle(BlueButton())
                     .sheet(isPresented: $showsLibrary) {
                         ImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage)
                     }

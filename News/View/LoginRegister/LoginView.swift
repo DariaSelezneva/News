@@ -13,6 +13,7 @@ struct LoginView: View {
     
     @State private var email: String = ""
     @State private var password: String = ""
+    @State private var showsPassword: Bool = false
     
     @State private var showsRegistration: Bool = false
     
@@ -21,8 +22,8 @@ struct LoginView: View {
             VStack(spacing: 30) {
                 TextField("Email", text: $email)
                     .withBackground()
-                TextField("Password", text: $password)
-                    .withBackground()
+                    .keyboardType(.emailAddress)
+                SecureTextField(title: "Password", text: $password, showsPassword: $showsPassword)
                 Button("Login") {
                     viewModel.login(email: email, password: password)
                 }

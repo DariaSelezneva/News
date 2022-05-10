@@ -15,6 +15,9 @@ struct API {
     static private let login = "/login"
     static private let register = "/register"
     
+    static private let file = "/file"
+    static private let uploadFile = "/uploadFile"
+    
     static private let news = "/news"
     static private let find = "/find"
     static private let user = "/user"
@@ -23,12 +26,13 @@ struct API {
     
     // MARK: - URLs
     
-    static private let loginURL: URL = URL(string: baseURL + auth + login)!
-    static private let registerURL: URL = URL(string: baseURL + auth + register)!
+    static let loginURL = baseURL + auth + login
+    static let registerURL = baseURL + auth + register
     
-    static private func getNewsURL(page: Int, perPage: Int) -> URL {
-        URL(string: baseURL + news + "?page=\(page)&perPage=\(perPage)")!
-    }
+    static let uploadFileURL = baseURL + file + uploadFile
+    
+    static func getNewsURL (page: Int, perPage: Int) -> String { baseURL + news + "?page=\(page)&perPage=\(perPage)" }
+  
     static private let createNewsURL: URL = URL(string: baseURL + news)!
     static private func newsURL(id: Int) -> URL { URL(string: baseURL + news + "/\(id)")! }
     static private func findNewsURL(author: String?, keywords: String?, page: Int, perPage: Int, tags: [String]?) -> URL {
