@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     
-    let viewModel = LoginViewModel()
+    var viewModel: LoginBusinessLogic?
     
     @State private var email: String = ""
     @State private var password: String = ""
@@ -25,7 +25,7 @@ struct LoginView: View {
                     .keyboardType(.emailAddress)
                 SecureTextField(title: "Password", text: $password, showsPassword: $showsPassword)
                 Button("Login") {
-                    viewModel.login(email: email, password: password)
+                    viewModel?.login(email: email, password: password)
                 }
                 .foregroundColor(.white)
                 .frame(width: 150, height: 50)

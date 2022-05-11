@@ -9,16 +9,24 @@ import Foundation
 import Combine
 import SwiftUI
 
+
+
 protocol LoginBusinessLogic {
-    
     func login(email: String, password: String)
 }
 
 class LoginViewModel: LoginBusinessLogic, ObservableObject {
     
     @AppStorage("token") var token: String = ""
+    @ObservedObject var appState: AppState
+    
+    init(appState: AppState) {
+        self.appState = appState
+    }
     
     @Published var emailValid: Bool = true
+    
+    @Published var error: String?
     
     var repository: LoginRepositoryLogic? = LoginRepository()
     
@@ -38,11 +46,19 @@ class LoginViewModel: LoginBusinessLogic, ObservableObject {
     }
     
     func login(email: String, password: String) {
-        repository?.loginPublisher(email: email, password: password)
+        appState.loadingState = .loading
+        repository?.login(email: email, password: password)
             .sink(receiveCompletion: { completion in
-                print(completion)
+                switch completion {
+                case .failure(let error):
+                    self.appState.loadingState = .error
+                    self.appState.error = error.localizedDescription
+                case .finished: self.appState.loadingState = .success
+                }
             }, receiveValue: { authResponse in
                 print(authResponse)
+                self.appState.user = User(id: authResponse.id, avatar: authResponse.avatar, email: authResponse.email, name: authResponse.name)
+                self.token = authResponse.token
             })
             .store(in: &subscriptions)
     }

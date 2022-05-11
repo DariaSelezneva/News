@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct User {
     
@@ -13,11 +14,32 @@ struct User {
     var avatar: String
     var email: String
     var name: String
-    var role: String
+    var role: String = "user"
+    
+    static let sample = User(id: "1", avatar: catImageURL, email: "example@bla.com", name: "John Smith")
     
 }
 
-extension User: Decodable {}
+extension User: Decodable {
+    
+    enum RootCodingKeys: String, CodingKey {
+        case data
+    }
+
+    enum DataCodingKeys: String, CodingKey {
+        case id, avatar, email, name, role
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: RootCodingKeys.self)
+        let data = try container.nestedContainer(keyedBy: DataCodingKeys.self, forKey: .data)
+        id = try data.decode(String.self, forKey: .id)
+        avatar = try data.decode(String.self, forKey: .avatar)
+        email = try data.decode(String.self, forKey: .email)
+        name = try data.decode(String.self, forKey: .name)
+        role = try data.decode(String.self, forKey: .role)
+    }
+}
 
 extension User: Encodable {
     
@@ -49,5 +71,4 @@ success = 1;
 }
 """
 
-let user3 = UserResponse(id: "00e28d06-14ea-4f12-b559-6a3f029da40e", avatar: "https://news-feed.dunice-testing.com/api/v1/file/502f5549-98ad-4db5-903b-c8d445bd4369.", email: "example3@bla.com", name: "NewUser", role: "user")
-let token3 = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwMGUyOGQwNi0xNGVhLTRmMTItYjU1OS02YTNmMDI5ZGE0MGUiLCJleHAiOjE2NTM0MzY4MDB9.ALjGxJQstnOiCV-dSk42WjMm54TuV1iAN9KhWhndIDmrcTPA16WRWvSLT-BNL3jQPNk_4_qAH5wNhJbDM9ZYqA"
+let user3 = AuthResponse(id: "00e28d06-14ea-4f12-b559-6a3f029da40e", avatar: "https://news-feed.dunice-testing.com/api/v1/file/502f5549-98ad-4db5-903b-c8d445bd4369.", email: "example3@bla.com", name: "NewUser", role: "user", token: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwMGUyOGQwNi0xNGVhLTRmMTItYjU1OS02YTNmMDI5ZGE0MGUiLCJleHAiOjE2NTM0MzY4MDB9.ALjGxJQstnOiCV-dSk42WjMm54TuV1iAN9KhWhndIDmrcTPA16WRWvSLT-BNL3jQPNk_4_qAH5wNhJbDM9ZYqA")

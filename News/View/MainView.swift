@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MainView: View {
     
+    @EnvironmentObject var appState: AppState
+    
     var body: some View {
         ZStack {
             TabView {
@@ -21,6 +23,12 @@ struct MainView: View {
                         Label("Profile", systemImage: "person.fill")
                     }
             }
+            if appState.loadingState == .loading {
+                ProgressView()
+            }
+        }
+        .alert(item: $appState.error) { error in
+            Alert(title: Text("error"))
         }
     }
 }

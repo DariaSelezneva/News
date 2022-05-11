@@ -10,10 +10,14 @@ import SwiftUI
 struct UserView: View {
     
     @AppStorage("token") var token: String = ""
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         if token.isEmpty {
-            LoginView()
+            LoginView(viewModel: LoginViewModel(appState: appState))
+        }
+        else {
+            ProfileView(viewModel: UserViewModel(appState: appState))
         }
     }
 }

@@ -10,19 +10,22 @@
 		4A2602D4A6FF486E34968CEA /* Pods_NewsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9BE3F17B996873A7EAA096 /* Pods_NewsTests.framework */; };
 		6EB9D0871562C14E103BF113 /* Pods_News.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CCA240BE8CEF168D69C14B8 /* Pods_News.framework */; };
 		6EBB93456A9CEDD8A9C618D1 /* Pods_News_NewsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42BE25F23FDF60C8DB495A4C /* Pods_News_NewsUITests.framework */; };
+		99536BAB282BA31D0093C97C /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99536BAA282BA31D0093C97C /* AppState.swift */; };
+		99536BAD282BA63A0093C97C /* e_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99536BAC282BA63A0093C97C /* e_String.swift */; };
+		99536BAF282BA8370093C97C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99536BAE282BA8370093C97C /* ProfileView.swift */; };
+		99536BB1282BAD590093C97C /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99536BB0282BAD590093C97C /* RemoteImage.swift */; };
+		99536BB3282BD34F0093C97C /* UploadPhotoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99536BB2282BD34F0093C97C /* UploadPhotoRepository.swift */; };
 		99A0260D2822BBB300513B8D /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A026042822BBB300513B8D /* API.swift */; };
 		99A0260E2822BBB300513B8D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A026072822BBB300513B8D /* LoginView.swift */; };
 		99A34FDA2824FFC20010BB43 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A34FD92824FFC20010BB43 /* PhotoPickerView.swift */; };
 		99A34FDF2825108D0010BB43 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A34FDE2825108D0010BB43 /* ImagePicker.swift */; };
 		99A34FE52825568F0010BB43 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A34FE42825568F0010BB43 /* NewsCell.swift */; };
 		99E3EA422823C0C200068312 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA412823C0C200068312 /* User.swift */; };
-		99E3EA442823C13B00068312 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA432823C13B00068312 /* UserResponse.swift */; };
 		99E3EA462823C28400068312 /* GetNewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA452823C28400068312 /* GetNewsResponse.swift */; };
 		99E3EA4A2823CAF500068312 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA492823CAF500068312 /* Post.swift */; };
 		99E3EA4C2823CB5300068312 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA4B2823CB5300068312 /* Tag.swift */; };
 		99E3EA4E2823CE4D00068312 /* UploadPhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA4D2823CE4D00068312 /* UploadPhotoResponse.swift */; };
 		99E3EA502823D16D00068312 /* FindNewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA4F2823D16D00068312 /* FindNewsResponse.swift */; };
-		99E3EA522823D24100068312 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA512823D24100068312 /* TokenResponse.swift */; };
 		99E3EA562823E74E00068312 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA552823E74E00068312 /* RegisterView.swift */; };
 		99E3EA592823E90000068312 /* e_TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA582823E90000068312 /* e_TextField.swift */; };
 		99E3EA5D2823F0D600068312 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA5C2823F0D600068312 /* MainView.swift */; };
@@ -74,19 +77,22 @@
 		4B494B15EEA6C175A981FBEE /* Pods-News-NewsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-News-NewsUITests.debug.xcconfig"; path = "Target Support Files/Pods-News-NewsUITests/Pods-News-NewsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		5AD387B7ADC13CE27EAD519F /* Pods-NewsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsTests.debug.xcconfig"; path = "Target Support Files/Pods-NewsTests/Pods-NewsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8149981D0504024BCD50A152 /* Pods-News.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-News.debug.xcconfig"; path = "Target Support Files/Pods-News/Pods-News.debug.xcconfig"; sourceTree = "<group>"; };
+		99536BAA282BA31D0093C97C /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		99536BAC282BA63A0093C97C /* e_String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = e_String.swift; sourceTree = "<group>"; };
+		99536BAE282BA8370093C97C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		99536BB0282BAD590093C97C /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
+		99536BB2282BD34F0093C97C /* UploadPhotoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhotoRepository.swift; sourceTree = "<group>"; };
 		99A026042822BBB300513B8D /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		99A026072822BBB300513B8D /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		99A34FD92824FFC20010BB43 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 		99A34FDE2825108D0010BB43 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		99A34FE42825568F0010BB43 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		99E3EA412823C0C200068312 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		99E3EA432823C13B00068312 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		99E3EA452823C28400068312 /* GetNewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNewsResponse.swift; sourceTree = "<group>"; };
 		99E3EA492823CAF500068312 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		99E3EA4B2823CB5300068312 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		99E3EA4D2823CE4D00068312 /* UploadPhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhotoResponse.swift; sourceTree = "<group>"; };
 		99E3EA4F2823D16D00068312 /* FindNewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindNewsResponse.swift; sourceTree = "<group>"; };
-		99E3EA512823D24100068312 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
 		99E3EA552823E74E00068312 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		99E3EA582823E90000068312 /* e_TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = e_TextField.swift; sourceTree = "<group>"; };
 		99E3EA5C2823F0D600068312 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -186,6 +192,7 @@
 			children = (
 				99E3EA6A2823F5D400068312 /* LoginRepository.swift */,
 				99E3EA6C2823F5DD00068312 /* RegisterRepository.swift */,
+				99536BB2282BD34F0093C97C /* UploadPhotoRepository.swift */,
 				99E3EA6E2823F5EC00068312 /* NewsRepository.swift */,
 				99E3EA702823F5F500068312 /* UserRepository.swift */,
 			);
@@ -199,8 +206,6 @@
 				DAEEEE2828296B6000BD13C3 /* LoginBody.swift */,
 				DAEEEE2628296A8E00BD13C3 /* RegistrationBody.swift */,
 				DA841C7B282A99DE0023C582 /* AuthResponse.swift */,
-				99E3EA432823C13B00068312 /* UserResponse.swift */,
-				99E3EA512823D24100068312 /* TokenResponse.swift */,
 				99E3EA4D2823CE4D00068312 /* UploadPhotoResponse.swift */,
 				99E3EA452823C28400068312 /* GetNewsResponse.swift */,
 				99E3EA4F2823D16D00068312 /* FindNewsResponse.swift */,
@@ -242,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				99A34FDE2825108D0010BB43 /* ImagePicker.swift */,
+				99536BB0282BAD590093C97C /* RemoteImage.swift */,
 				DA841C7D282AB06C0023C582 /* SecureTextField.swift */,
 				DA841C7F282AB1E00023C582 /* BlueButton.swift */,
 			);
@@ -262,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				99E3EA582823E90000068312 /* e_TextField.swift */,
+				99536BAC282BA63A0093C97C /* e_String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -279,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				99E3EA602823F12100068312 /* UserView.swift */,
+				99536BAE282BA8370093C97C /* ProfileView.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -309,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				99FCBAF428227DA700BA60DA /* NewsApp.swift */,
+				99536BAA282BA31D0093C97C /* AppState.swift */,
 				99A026032822BBB300513B8D /* API Service */,
 				99A026062822BBB300513B8D /* View */,
 				99A025FE2822BBB300513B8D /* ViewModel */,
@@ -585,21 +594,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99536BAD282BA63A0093C97C /* e_String.swift in Sources */,
 				99A0260D2822BBB300513B8D /* API.swift in Sources */,
 				99A34FE52825568F0010BB43 /* NewsCell.swift in Sources */,
 				99E3EA5D2823F0D600068312 /* MainView.swift in Sources */,
 				99E3EA562823E74E00068312 /* RegisterView.swift in Sources */,
 				99A34FDF2825108D0010BB43 /* ImagePicker.swift in Sources */,
 				99E3EA612823F12100068312 /* UserView.swift in Sources */,
+				99536BAB282BA31D0093C97C /* AppState.swift in Sources */,
 				DAEEEE2728296A8E00BD13C3 /* RegistrationBody.swift in Sources */,
 				99A0260E2822BBB300513B8D /* LoginView.swift in Sources */,
 				99E3EA4A2823CAF500068312 /* Post.swift in Sources */,
 				DA841C7C282A99DE0023C582 /* AuthResponse.swift in Sources */,
+				99536BAF282BA8370093C97C /* ProfileView.swift in Sources */,
 				99E3EA422823C0C200068312 /* User.swift in Sources */,
 				99E3EA652823F5B700068312 /* RegisterViewModel.swift in Sources */,
 				99E3EA502823D16D00068312 /* FindNewsResponse.swift in Sources */,
 				99A34FDA2824FFC20010BB43 /* PhotoPickerView.swift in Sources */,
 				99E3EA672823F5C000068312 /* NewsViewModel.swift in Sources */,
+				99536BB3282BD34F0093C97C /* UploadPhotoRepository.swift in Sources */,
 				DA841C80282AB1E00023C582 /* BlueButton.swift in Sources */,
 				DA841C7E282AB06C0023C582 /* SecureTextField.swift in Sources */,
 				99E3EA6D2823F5DD00068312 /* RegisterRepository.swift in Sources */,
@@ -609,13 +622,12 @@
 				99E3EA712823F5F500068312 /* UserRepository.swift in Sources */,
 				99E3EA692823F5C800068312 /* UserViewModel.swift in Sources */,
 				DAEEEE2928296B6000BD13C3 /* LoginBody.swift in Sources */,
+				99536BB1282BAD590093C97C /* RemoteImage.swift in Sources */,
 				99FCBAF528227DA700BA60DA /* NewsApp.swift in Sources */,
 				99E3EA6F2823F5EC00068312 /* NewsRepository.swift in Sources */,
 				99E3EA592823E90000068312 /* e_TextField.swift in Sources */,
 				99E3EA4C2823CB5300068312 /* Tag.swift in Sources */,
 				99E3EA6B2823F5D400068312 /* LoginRepository.swift in Sources */,
-				99E3EA442823C13B00068312 /* UserResponse.swift in Sources */,
-				99E3EA522823D24100068312 /* TokenResponse.swift in Sources */,
 				99E3EA462823C28400068312 /* GetNewsResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

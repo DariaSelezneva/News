@@ -19,29 +19,20 @@ let token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmNTJiZWM5YS1lMTFlLTQ2ZjctOGI
 
 protocol LoginRepositoryLogic {
     
-    func loginPublisher(email: String, password: String) -> AnyPublisher<AuthResponse, Error>
+    func login(email: String, password: String) -> AnyPublisher<AuthResponse, Error>
     
 }
 
 class LoginRepository: LoginRepositoryLogic {
     
-    func loginPublisher(email: String, password: String) -> AnyPublisher<AuthResponse, Error> {
+    func login(email: String, password: String) -> AnyPublisher<AuthResponse, Error> {
         let parameters = ["email" : email, "password" : password]
         let headers: HTTPHeaders = ["Content-Type" : "application/json"]
         return AF.request(API.loginURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .validate()
             .publishDecodable(type: AuthResponse.self, queue: .main)
             .value()
             .mapError({$0 as Error})
             .eraseToAnyPublisher()
-        
-//            .responseJSON { response in
-//                let decoder = JSONDecoder()
-//                if let data = response.data {
-//                    let user = try? decoder.decode(UserResponse.self, from: data)
-//                    print(user)
-//                    let token = try? decoder.decode(TokenResponse.self, from: data)
-//                    print(token)
-//                }
-//            }
     }
 }

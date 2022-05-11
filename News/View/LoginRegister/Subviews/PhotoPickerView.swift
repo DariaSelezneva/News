@@ -11,6 +11,7 @@ import Photos
 struct PhotoPickerView: View {
     
     @Binding var selectedImage: UIImage
+    var url: String?
     
     @State private var photoButtonsShown: Bool = false
     @State private var showsCamera: Bool = false
