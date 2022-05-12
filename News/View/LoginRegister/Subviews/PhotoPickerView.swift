@@ -54,6 +54,6 @@ struct PhotoPickerView: View {
 
 struct PhotoPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        PhotoPickerView(selectedImage: .constant(UIImage(named: "user-placeholder")!))
+        PhotoPickerView(selectedImage: .constant(UIImage(named: "image-placeholder")!))
     }
 }

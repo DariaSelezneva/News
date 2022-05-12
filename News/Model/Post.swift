@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Post {
+struct Post : Identifiable {
     
     var id: Int
     var userId: String
@@ -16,6 +16,9 @@ struct Post {
     var image: String
     var username: String
     var tags: [Tag]
+    
+    
+    static let sample = Post(id: 1, userId: "", title: "Title", description: "Some long long multilined description, let's think what could I write here, maybe something about Doctor Who?", image: "", username: "John Smith", tags: [Tag(id: 1, title: "tag"), Tag(id: 2, title: "anothertag")])
     
 }
 
@@ -34,4 +37,28 @@ extension Post: Encodable {
         try container.encode(image, forKey: .image)
         try container.encode(tags.map({$0.title}), forKey: .tags)
     }
+}
+
+extension Post {
+    
+    init?(from dict: [String: Any]) {
+        guard
+            let id = dict["id"] as? Int,
+        let userId = dict["userId"] as? String,
+        let title = dict["title"] as? String,
+        let description = dict["description"] as? String,
+        let image = dict["image"] as? String,
+        let username = dict["username"] as? String,
+        let tagsDictArray = dict["tags"] as? Array<[String : Any]>
+        else { return nil }
+        let tags = tagsDictArray.map { dict in Tag(id: dict["id"] as! Int, title: dict["title"] as! String) }
+        self.id = id
+        self.userId = userId
+        self.title = title
+        self.description = description
+        self.image = image
+        self.username = username
+        self.tags = tags
+    }
+    
 }

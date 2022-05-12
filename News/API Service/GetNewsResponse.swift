@@ -10,7 +10,6 @@ import Foundation
 struct GetNewsResponse {
     
     var posts: [Post]
-    
 }
 
 extension GetNewsResponse: Decodable {

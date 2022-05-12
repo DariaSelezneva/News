@@ -12,7 +12,7 @@ struct RegisterView: View {
     
     let viewModel: RegisterBusinessLogic = RegisterViewModel()
     
-    @State var selectedImage: UIImage = UIImage(named: "user-placeholder")!
+    @State var selectedImage: UIImage = UIImage(named: "image-placeholder")!
     
     @State private var email: String = ""
     @State private var password: String = ""

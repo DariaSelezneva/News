@@ -34,7 +34,9 @@ class UserViewModel : UserBusinessLogic {
         appState.loadingState = .loading
         userRepository.getUser(token: token)
             .sink(receiveCompletion: receiveCompletion(_ :),
-                  receiveValue: { [weak self] in self?.appState.user = $0 })
+                  receiveValue: { [weak self] in self?.appState.user = $0
+                print($0)
+            })
             .store(in: &subscriptions)
     }
     
@@ -54,7 +56,6 @@ class UserViewModel : UserBusinessLogic {
     private func receiveCompletion(_ completion: Subscribers.Completion<Error>) {
         switch completion {
         case .failure(let error):
-            print(error)
             appState.error = error.localizedDescription
         case .finished: appState.loadingState = .success
         }

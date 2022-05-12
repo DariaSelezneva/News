@@ -24,7 +24,6 @@ struct RemoteImage: View {
             guard let parsedURL = URL(string: url) else {
                 fatalError("Invalid URL: \(url)")
             }
-
             URLSession.shared.dataTask(with: parsedURL) { data, response, error in
                 if let data = data, data.count > 0 {
                     self.data = data
@@ -49,7 +48,7 @@ struct RemoteImage: View {
             .resizable()
     }
 
-    init(url: String, loading: Image = Image("user-placeholder"), failure: Image = Image(systemName: "multiply.circle"), onReceiveData: @escaping (UIImage) -> ()) {
+    init(url: String, loading: Image = Image("image-placeholder"), failure: Image = Image(systemName: "multiply.circle"), onReceiveData: @escaping (UIImage) -> ()) {
         _loader = StateObject(wrappedValue: Loader(url: url))
         self.loading = loading
         self.failure = failure

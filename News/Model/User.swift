@@ -16,7 +16,7 @@ struct User {
     var name: String
     var role: String = "user"
     
-    static let sample = User(id: "1", avatar: catImageURL, email: "example@bla.com", name: "John Smith")
+    static let sample = User(id: "1", avatar: cat2ImageURL, email: "example@bla.com", name: "John Smith")
     
 }
 

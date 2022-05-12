@@ -30,6 +30,7 @@ struct LoginView: View {
                 .foregroundColor(.white)
                 .frame(width: 150, height: 50)
                 .background(RoundedRectangle(cornerRadius: 12).fill(Color.blue))
+                .disabled(email.isEmpty || password.isEmpty)
             }
             VStack(spacing: 30) {
                 Text("Haven't registered yet?")
@@ -39,11 +40,7 @@ struct LoginView: View {
             }
         }
         .sheet(isPresented: $showsRegistration, content: {
-            if #available(iOS 15.0, *) {
-                RegisterView()
-            } else {
-                // Fallback on earlier versions
-            }
+            RegisterView()
         })
         .padding()
     }

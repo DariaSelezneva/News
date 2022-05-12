@@ -23,16 +23,16 @@ struct ProfileView: View {
     var body: some View {
         ScrollView {
             ZStack {
-                if appState.user != nil {
+                if let user = appState.user {
                     if !isEditingUser {
                         HStack(spacing: 12) {
-                            RemoteImage(url: user.avatar, onReceiveData: { selectedImage = $0 })
+                            LoadableImage(url: user.avatar, onReceiveData: { selectedImage = $0 })
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 120, height: 120)
                                 .clipShape(Circle())
                             VStack(alignment: .leading, spacing: 12) {
-                                Text(appState.user?.name ?? "user-name")
-                                Text(appState.user?.email ?? "user-email")
+                                Text(user.name)
+                                Text(user.email)
                             }
                             Spacer()
                             Button {
