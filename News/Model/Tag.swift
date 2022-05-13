@@ -13,3 +13,7 @@ struct Tag: Codable, Identifiable {
     var title: String
     
 }
+
+extension Tag: Equatable {
+    
+}

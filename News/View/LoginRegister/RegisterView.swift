@@ -28,6 +28,7 @@ struct RegisterView: View {
                 .withBackground()
             TextField("Email", text: $email)
                 .withBackground()
+                .autocapitalization(.none)
             VStack {
                 SecureTextField(title: "Password", text: $password, showsPassword: $showsPassword)
                 SecureTextField(title: "Confirm password", text: $confirmPassword, showsPassword: $showsPassword)

@@ -10,7 +10,10 @@ import SwiftUI
 struct NewsSmallCell: View {
     
     let post: Post
+    let activeTags: [String]
+    
     let onTapName: () -> ()
+    let onTapTag: (Tag) -> ()
     
     var body: some View {
         VStack {
@@ -31,12 +34,19 @@ struct NewsSmallCell: View {
                         .lineLimit(2)
                     
                 }
+                Spacer()
             }
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(post.tags) { tag in
                         Text("#" + tag.title)
-                            .opacity(0.6)
+                            .foregroundColor(activeTags.contains(tag.title) ? Color.white : Color.gray)
+                            .opacity(0.8)
+                            .onTapGesture {
+                                onTapTag(tag)
+                            }
+                            .padding(.all, 3)
+                            .background(activeTags.contains(tag.title) ? Color.red : Color.clear)
                     }
                 }
             }
@@ -48,7 +58,7 @@ struct NewsSmallCell: View {
 
 struct NewsSmallCell_Previews: PreviewProvider {
     static var previews: some View {
-        NewsSmallCell(post: Post.sample, onTapName: {})
+        NewsSmallCell(post: Post.sample, activeTags: [], onTapName: {}, onTapTag: {_ in})
             .previewLayout(.sizeThatFits)
     }
 }

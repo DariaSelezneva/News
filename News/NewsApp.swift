@@ -13,9 +13,6 @@ struct NewsApp: App {
     
     let appState = AppState()
     
-    @State var subs: Set<AnyCancellable> = []
-    let rep = UploadPhotoRepository()
-    
     var body: some Scene {
         WindowGroup {
            MainView()

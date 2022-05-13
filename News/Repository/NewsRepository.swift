@@ -11,49 +11,44 @@ import Combine
 
 protocol NewsRepositoryLogic {
     
-    func getNews(page: Int, perPage: Int) -> AnyPublisher<[Post], Error>
+    func getNews(page: Int, perPage: Int) -> AnyPublisher<DataNewsResponse, Error>
 }
 
 class NewsRepository: NewsRepositoryLogic {
     
-    func getNews(page: Int, perPage: Int) -> AnyPublisher<[Post], Error> {
-        let headers: HTTPHeaders = ["Content-Type" : "application/json"]
-        return AF.request(API.getNewsURL(page: page, perPage: perPage), headers: headers)
-            .responseJSON(completionHandler: { response in
-                print(response)
-            })
+    func getNews(page: Int, perPage: Int) -> AnyPublisher<DataNewsResponse, Error> {
+        var params: Parameters = [:]
+        params["page"] = page
+        params["perPage"] = perPage
+        return AF.request(API.getNewsURL, method: .get, parameters: params, encoding: URLEncoding.default)
             .validate()
-            .publishDecodable(type: [Post].self, queue: .main)
+            .publishDecodable(type: GetNewsResponse.self, queue: .main)
             .value()
+            .map({$0.data})
             .mapError({$0 as Error})
+            .print()
             .eraseToAnyPublisher()
     }
     
-    func getNewsURLSession(page: Int, perPage: Int) -> AnyPublisher<[Post], Error> {
-        var request = URLRequest(url: URL(string: API.getNewsURL(page: page, perPage: perPage))!)
-        request.httpMethod = "GET"
-        return URLSession.shared.dataTaskPublisher(for: request)
-            .receive(on: DispatchQueue.main)
-            .map { output -> [Post] in
-                let data = output.data
-                if let jsonDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any],
-                   let dataDict = jsonDict["data"] as? [String : Any],
-                   let content = dataDict["content"] as? Array<[String : Any]> {
-                    return content.compactMap { dict in Post.init(from: dict) }
-                }
-                else { return [] }
-            }
-            .mapError({ $0 as Error })
+    func findNews(page: Int, perPage: Int, keywords: String? = nil, user: String? = nil, tags: [String]? = nil) -> AnyPublisher<DataNewsResponse, Error> {
+        var params: Parameters = [:]
+        params["page"] = page
+        params["perPage"] = perPage
+        if let keywords = keywords {
+            params["keywords"] = keywords
+        }
+        if let user = user {
+            params["user"] = user
+        }
+        if let tags = tags, !tags.isEmpty {
+            params["tags"] = tags
+        }
+        return AF.request(API.findNewsURL, method: .get, parameters: params, encoding: URLEncoding.default)
+            .validate()
+            .publishDecodable(type: DataNewsResponse.self, queue: .main)
+            .value()
+            .mapError({$0 as Error})
+            .print()
             .eraseToAnyPublisher()
-//        URLSession.shared.dataTask(with: request) { data, response, error in
-//            if let data = data,
-//               let jsonDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any],
-//               let dataDict = jsonDict["data"] as? [String : Any],
-//               let content = dataDict["content"] as? Array<[String : Any]> {
-//                let news = content.compactMap { dict in Post.init(from: dict) }
-//                print(news)
-//            }
-//        }
-//        .resume()
     }
 }

@@ -14,7 +14,7 @@ struct MainView: View {
     var body: some View {
         ZStack {
             TabView {
-                NewsListView(viewModel: NewsViewModel(appState: appState))
+                NewsListView()
                     .tabItem {
                         Label("News", systemImage: "line.3.horizontal")
                     }

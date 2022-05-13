@@ -7,24 +7,13 @@
 
 import Foundation
 
-struct GetNewsResponse {
-    
-    var posts: [Post]
+struct GetNewsResponse: Decodable {
+    var data: DataNewsResponse
+    var statusCode: Int
+    var success: Bool
 }
 
-extension GetNewsResponse: Decodable {
-    
-    enum RootCodingKeys: String, CodingKey {
-        case data
-    }
-    
-    enum ContentCodingKeys: String, CodingKey {
-        case content
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: RootCodingKeys.self)
-        let data = try container.nestedContainer(keyedBy: ContentCodingKeys.self, forKey: .data)
-        posts = try data.decode([Post].self, forKey: .content)
-    }
+struct DataNewsResponse: Decodable {
+    var content: [Post]
+    var numberOfElements: Int
 }

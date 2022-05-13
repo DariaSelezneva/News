@@ -21,6 +21,7 @@ struct SearchField: View {
         ZStack {
             TextField(placeholder, text: $text)
                 .withBackground()
+                .autocapitalization(.none)
             if !text.isEmpty {
                 HStack {
                     Spacer()

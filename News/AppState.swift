@@ -32,10 +32,6 @@ class AppState: ObservableObject, Stateful {
     @Published var user: User? 
     @Published var userImage: UIImage?
     
-    @Published var news: [Post] = []
-//    Array<Post>(repeating: Post.sample, count: 10).enumerated().map { index, post in
-//        var newPost = post
-//        newPost.id = index
-//        return newPost
-//    }
+    
+
 }

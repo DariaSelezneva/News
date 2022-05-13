@@ -31,20 +31,12 @@ struct API {
     
     static let uploadFileURL = baseURL + file + uploadFile
     
-    static func getNewsURL (page: Int, perPage: Int) -> String { baseURL + news + "?page=\(page)&perPage=\(perPage)" }
+    static let getNewsURL = baseURL + news
+    static let findNewsURL = baseURL + news + find
   
     static private let createNewsURL: URL = URL(string: baseURL + news)!
     static private func newsURL(id: Int) -> URL { URL(string: baseURL + news + "/\(id)")! }
-    static private func findNewsURL(author: String?, keywords: String?, page: Int, perPage: Int, tags: [String]?) -> URL {
-        let authorQuery = author != nil ? "author=\(author!)" : ""
-        let keywordsQuery = keywords != nil ? "keywords=\(keywords!)" : ""
-        let pageQuery = "page=\(page)"
-        let perPageQuery = "perPage=\(perPage)"
-        var tagsQuery = ""
-        if let tags = tags {
-            tagsQuery = tags.map { "&tags=\($0)" }.joined()
-        }
-        return URL(string: baseURL + news + find + "?")! }
+
     static private func userNewsURL(userID: Int) -> URL {
         URL(string: baseURL + news + user + "/\(userID)")!
     }

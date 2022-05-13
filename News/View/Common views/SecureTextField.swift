@@ -18,10 +18,12 @@ struct SecureTextField: View {
             if showsPassword {
                 TextField(title, text: $text)
                     .withBackground()
+                    .autocapitalization(.none)
             }
             else {
                 SecureField(title, text: $text)
                     .withBackground()
+                    .autocapitalization(.none)
             }
             HStack {
                 Spacer()
