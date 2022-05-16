@@ -14,10 +14,22 @@ struct NewsListView: View {
     @State private var showsLargeCells: Bool = false
     @State private var query: String = ""
     @State private var activeTags: [String] = []
-    @State private var userSelected: String?
     
     var body: some View {
         VStack {
+            if let selectedUser = viewModel.selectedUser {
+                ZStack(alignment: .topTrailing) {
+                    UserProfileView(imageURL: selectedUser.avatar, name: selectedUser.name, email: selectedUser.email, selectedImage: .constant(UIImage()))
+                    Button {
+                        viewModel.selectedUser = nil
+                        viewModel.getNews()
+                    } label: {
+                        Image(systemName: "multiply")
+                            .font(.system(size: 24))
+                            .frame(width: 50, height: 50)
+                    }
+                }
+            }
             SearchField("Search...", text: $query)
             Picker("", selection: $showsLargeCells) {
                 Image(systemName: "rectangle.grid.1x2").tag(false)
@@ -33,10 +45,11 @@ struct NewsListView: View {
                 LazyVStack {
                     ForEach(Array(zip(viewModel.news.indices, viewModel.news)), id: \.0) { index, post in
                         NewsCell(post: post,
+                                 imageURL: Binding(get: { post.image }, set: {_ in }),
                                  activeTags: activeTags,
-                                 showsLargeCells: $showsLargeCells,
+                                 showsLargeCells: $showsLargeCells, isEditable: false,
                                  onTapName: {
-                            
+                            viewModel.getUser(id: post.userId)
                         },
                                  onTapTag: { tag in
                             if !activeTags.contains(where: { $0 == tag.title }) {

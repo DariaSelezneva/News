@@ -26,7 +26,7 @@ struct ProfileView: View {
                 if let user = appState.user {
                     if !isEditingUser {
                         HStack(spacing: 12) {
-                            LoadableImage(url: user.avatar, onReceiveData: { selectedImage = $0 })
+                            LoadableImage(url: Binding(get: { user.avatar }, set: { _ in }), onReceiveData: { selectedImage = $0 })
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 120, height: 120)
                                 .clipShape(Circle())
@@ -49,33 +49,20 @@ struct ProfileView: View {
                         }
                     }
                     else {
-                        VStack(spacing: 12) {
-                            PhotoPickerView(selectedImage: $selectedImage)
-                            TextField("Name", text: $name)
-                                .withBackground()
-                            TextField("Email", text: $email)
-                                .withBackground()
-                                .autocapitalization(.none)
-                            HStack(spacing: 60) {
-                                Button("Cancel") {
-                                    withAnimation(.easeInOut) {
-                                        isEditingUser = false
-                                    }
-                                }
-                                Button("Save") {
-                                    viewModel?.updateUser(avatar: selectedImage, name: name, email: email)
-                                    isEditingUser = false
-                                }
-                                .buttonStyle(BlueButton())
+                        EditingProfileView(image: $selectedImage, name: $name, email: $email, onCancel: {
+                            withAnimation(.easeInOut) {
+                                isEditingUser = false
                             }
-                            Spacer()
-                        }
+                        }, onSave: {
+                            viewModel?.updateUser(avatar: selectedImage, name: name, email: email)
+                            isEditingUser = false
+                        })
                     }
                 }
             }
             .onAppear {
                 if appState.user == nil && token != "" {
-                    viewModel?.getUser(token: token)
+                    viewModel?.getUser()
                 }
             }
         }

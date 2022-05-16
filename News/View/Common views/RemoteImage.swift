@@ -65,6 +65,7 @@ struct RemoteImage: View {
             if let image = UIImage(data: loader.data) {
                 onReceiveData(image)
                 return Image(uiImage: image)
+                
             } else {
                 return failure
             }

@@ -11,7 +11,7 @@ import Combine
 
 protocol UserBusinessLogic {
     
-    func getUser(token: String)
+    func getUser()
     func updateUser(avatar: UIImage, name: String, email: String)
 }
 
@@ -30,22 +30,22 @@ class UserViewModel : UserBusinessLogic {
         self.appState = appState
     }
     
-    func getUser(token: String) {
+    func getUser() {
+        guard let token = UserDefaults.standard.string(forKey: "token"), !token.isEmpty else { return }
         appState.loadingState = .loading
         userRepository.getUser(token: token)
             .sink(receiveCompletion: receiveCompletion(_ :),
-                  receiveValue: { [weak self] in self?.appState.user = $0
-                print($0)
-            })
+                  receiveValue: { [weak self] in self?.appState.user = $0 })
             .store(in: &subscriptions)
     }
     
     func updateUser(avatar: UIImage, name: String, email: String) {
+        guard let token = UserDefaults.standard.string(forKey: "token"), !token.isEmpty else { return }
         appState.loadingState = .loading
         uploadRepository.uploadPhoto(avatar)
             .sink(receiveCompletion: receiveCompletion(_ :),
                   receiveValue: { url in
-                self.userRepository.updateUser(avatar: url, email: email, name: name)
+                self.userRepository.updateUser(token: token, avatar: url, email: email, name: name)
                     .sink(receiveCompletion: self.receiveCompletion(_ :),
                           receiveValue: { self.appState.user = $0 })
                     .store(in: &self.subscriptions)

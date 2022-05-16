@@ -19,11 +19,13 @@ struct SecureTextField: View {
                 TextField(title, text: $text)
                     .withBackground()
                     .autocapitalization(.none)
+                    .disableAutocorrection(true)
             }
             else {
                 SecureField(title, text: $text)
                     .withBackground()
                     .autocapitalization(.none)
+                    .disableAutocorrection(true)
             }
             HStack {
                 Spacer()

@@ -41,6 +41,6 @@ struct API {
         URL(string: baseURL + news + user + "/\(userID)")!
     }
     
+    static let userURL = baseURL + user
     static let getUserInfoURL = baseURL + user + info
-    static let replaceUserURL = baseURL + user
 }

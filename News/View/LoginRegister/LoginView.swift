@@ -22,6 +22,8 @@ struct LoginView: View {
             VStack(spacing: 30) {
                 TextField("Email", text: $email)
                     .withBackground()
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
                     .keyboardType(.emailAddress)
                 SecureTextField(title: "Password", text: $password, showsPassword: $showsPassword)
                 Button("Login") {

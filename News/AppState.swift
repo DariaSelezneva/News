@@ -29,9 +29,5 @@ class AppState: ObservableObject, Stateful {
         }
     }
     
-    @Published var user: User? 
-    @Published var userImage: UIImage?
-    
-    
-
+    @Published var user: User?
 }

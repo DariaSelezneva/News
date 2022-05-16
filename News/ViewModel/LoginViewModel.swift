@@ -56,7 +56,7 @@ class LoginViewModel: LoginBusinessLogic, ObservableObject {
                 case .finished: self.appState.loadingState = .success
                 }
             }, receiveValue: { authResponse in
-                print(authResponse)
+//                print(authResponse)
                 self.appState.user = User(id: authResponse.id, avatar: authResponse.avatar, email: authResponse.email, name: authResponse.name)
                 self.token = authResponse.token
             })

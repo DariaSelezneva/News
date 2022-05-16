@@ -10,6 +10,7 @@ import SwiftUI
 struct NewsLargeCell: View {
     
     let post: Post
+    @Binding var imageURL: String
     let activeTags: [String]
     
     let onTapName: () -> ()
@@ -17,34 +18,20 @@ struct NewsLargeCell: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            LoadableImage(url: post.image, onReceiveData: { _ in })
+            LoadableImage(url: $imageURL, onReceiveData: { _ in })
                 .aspectRatio(contentMode: .fill)
                 .frame(height: 200)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
             
             Text(post.title)
                 .fontWeight(.semibold)
-            Text(post.description)
+            Text(post.text)
             HStack(spacing: 20) {
                 Button(post.username) {
                     onTapName()
                 }
                 Spacer()
-                ScrollView(.horizontal) {
-                    HStack {
-                        ForEach(post.tags) { tag in
-                            Text("#" + tag.title)
-                                .foregroundColor(activeTags.contains(tag.title) ? Color.white : Color.gray)
-                                .opacity(0.8)
-                                .onTapGesture {
-                                    onTapTag(tag)
-                                }
-                                .padding(.all, 3)
-                                .background(activeTags.contains(tag.title) ? Color.red : Color.clear)
-                        }
-                    }
-                    .frame(height: 40)
-                }
+                TagsView(tags: post.tags, activeTags: activeTags, onTapTag: onTapTag)
             }
         }
         .padding()
@@ -54,7 +41,7 @@ struct NewsLargeCell: View {
 
 struct NewsLargeCell_Previews: PreviewProvider {
     static var previews: some View {
-        NewsLargeCell(post: Post.sample, activeTags: [], onTapName: {}, onTapTag: {_ in})
+        NewsLargeCell(post: Post.sample, imageURL: .constant(""), activeTags: [], onTapName: {}, onTapTag: {_ in})
             .previewLayout(.sizeThatFits)
     }
 }

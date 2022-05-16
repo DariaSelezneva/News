@@ -10,6 +10,7 @@ import SwiftUI
 struct NewsSmallCell: View {
     
     let post: Post
+    @Binding var imageURL: String
     let activeTags: [String]
     
     let onTapName: () -> ()
@@ -18,7 +19,7 @@ struct NewsSmallCell: View {
     var body: some View {
         VStack {
             HStack(alignment: .top, spacing: 12) {
-                LoadableImage(url: post.image, onReceiveData: { _ in })
+                LoadableImage(url: $imageURL, onReceiveData: { _ in })
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 100, height: 100)
                     .clipShape(RoundedRectangle(cornerRadius: 16))
@@ -30,26 +31,13 @@ struct NewsSmallCell: View {
                     Text(post.title)
                         .fontWeight(.semibold)
                         .lineLimit(1)
-                    Text(post.description)
+                    Text(post.text)
                         .lineLimit(2)
                     
                 }
                 Spacer()
             }
-            ScrollView(.horizontal) {
-                HStack {
-                    ForEach(post.tags) { tag in
-                        Text("#" + tag.title)
-                            .foregroundColor(activeTags.contains(tag.title) ? Color.white : Color.gray)
-                            .opacity(0.8)
-                            .onTapGesture {
-                                onTapTag(tag)
-                            }
-                            .padding(.all, 3)
-                            .background(activeTags.contains(tag.title) ? Color.red : Color.clear)
-                    }
-                }
-            }
+            TagsView(tags: post.tags, activeTags: activeTags, onTapTag: onTapTag)
         }
         .padding()
         .background(RoundedRectangle(cornerRadius: 16).fill(Color.gray.opacity(0.1)))
@@ -58,7 +46,7 @@ struct NewsSmallCell: View {
 
 struct NewsSmallCell_Previews: PreviewProvider {
     static var previews: some View {
-        NewsSmallCell(post: Post.sample, activeTags: [], onTapName: {}, onTapTag: {_ in})
+        NewsSmallCell(post: Post.sample, imageURL: .constant(""), activeTags: [], onTapName: {}, onTapTag: {_ in})
             .previewLayout(.sizeThatFits)
     }
 }

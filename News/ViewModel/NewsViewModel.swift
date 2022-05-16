@@ -12,6 +12,7 @@ protocol NewsBusinessLogic {
     
     func getNews()
     func loadMore()
+    func getUser(id: String)
 }
 
 class NewsViewModel: NewsBusinessLogic, ObservableObject {
@@ -38,6 +39,7 @@ class NewsViewModel: NewsBusinessLogic, ObservableObject {
     var numberOfElements: Int = 0
     var isMore: Bool { numberOfElements > news.count }
     var query: String?
+    var selectedUser: User?
     var tags: [String] = []
     
     func getNews() {
@@ -52,7 +54,7 @@ class NewsViewModel: NewsBusinessLogic, ObservableObject {
     
     func findNews() {
         loadingState = .loading
-        repository.findNews(page: 1, perPage: perPage, keywords: query, tags: tags)
+        repository.findNews(page: 1, perPage: perPage, keywords: query, author: selectedUser?.name, tags: tags)
             .sink(receiveCompletion: receiveCompletion(_:), receiveValue: { data in
                 self.numberOfElements = data.numberOfElements
                 self.news = data.content
@@ -64,12 +66,21 @@ class NewsViewModel: NewsBusinessLogic, ObservableObject {
         if isMore {
             loadingState = .loading
             page += 1
-            repository.findNews(page: page, perPage: perPage, keywords: query, tags: tags)
+            repository.findNews(page: page, perPage: perPage, keywords: query, author: selectedUser?.name, tags: tags)
                 .sink(receiveCompletion: receiveCompletion(_:), receiveValue: { data in
                     self.news.append(contentsOf: data.content)
                 })
                 .store(in: &subscriptions)
         }
+    }
+    
+    func getUser(id: String) {
+        repository.getUser(id: id)
+            .sink(receiveCompletion: receiveCompletion(_:), receiveValue: { user in
+                self.selectedUser = user
+                self.findNews()
+            })
+            .store(in: &subscriptions)
     }
     
     private func receiveCompletion(_ completion: Subscribers.Completion<Error>) {
