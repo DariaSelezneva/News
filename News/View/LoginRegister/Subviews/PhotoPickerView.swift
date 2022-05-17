@@ -12,6 +12,7 @@ struct PhotoPickerView: View {
     
     @Binding var selectedImage: UIImage
     var url: String?
+    let isCircle: Bool
     
     @State private var photoButtonsShown: Bool = false
     @State private var showsCamera: Bool = false
@@ -19,11 +20,19 @@ struct PhotoPickerView: View {
     
     var body: some View {
         VStack(spacing: 12) {
-            Image(uiImage: selectedImage)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 120, height: 120)
-                .clipShape(Circle())
+            if let url = url, !url.isEmpty {
+                LoadableImage(url: Binding(get: { url }, set: { _ in }), onReceiveData: { _ in })
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 120, height: 120)
+                    .clipShape(RoundedRectangle(cornerRadius: isCircle ? 60 : 12))
+            }
+            else {
+                Image(uiImage: selectedImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 120, height: 120)
+                    .clipShape(RoundedRectangle(cornerRadius: isCircle ? 60 : 12))
+            }
             Button("Select photo") {
                 withAnimation(.easeInOut) {
                     photoButtonsShown.toggle()
@@ -48,12 +57,5 @@ struct PhotoPickerView: View {
                 }
             }
         }
-    }
-}
-
-
-struct PhotoPickerView_Previews: PreviewProvider {
-    static var previews: some View {
-        PhotoPickerView(selectedImage: .constant(UIImage(named: "image-placeholder")!))
     }
 }

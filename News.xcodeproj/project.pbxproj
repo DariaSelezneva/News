@@ -15,6 +15,9 @@
 		99536BAF282BA8370093C97C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99536BAE282BA8370093C97C /* ProfileView.swift */; };
 		99536BB1282BAD590093C97C /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99536BB0282BAD590093C97C /* RemoteImage.swift */; };
 		99536BB3282BD34F0093C97C /* UploadPhotoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99536BB2282BD34F0093C97C /* UploadPhotoRepository.swift */; };
+		998B328428338E68004BA58B /* SuccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998B328328338E68004BA58B /* SuccessResponse.swift */; };
+		998B328628339121004BA58B /* PostCreationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998B328528339121004BA58B /* PostCreationResponse.swift */; };
+		998B32882833E6C1004BA58B /* PostCreationBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998B32872833E6C1004BA58B /* PostCreationBody.swift */; };
 		999D2F6B282E4E120064D6CE /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999D2F6A282E4E120064D6CE /* NewsCell.swift */; };
 		99A0260D2822BBB300513B8D /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A026042822BBB300513B8D /* API.swift */; };
 		99A0260E2822BBB300513B8D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A026072822BBB300513B8D /* LoginView.swift */; };
@@ -22,7 +25,7 @@
 		99A34FDF2825108D0010BB43 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A34FDE2825108D0010BB43 /* ImagePicker.swift */; };
 		99A34FE52825568F0010BB43 /* NewsLargeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A34FE42825568F0010BB43 /* NewsLargeCell.swift */; };
 		99AB21052832483E0069CF48 /* TagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB21042832483E0069CF48 /* TagsView.swift */; };
-		99AB2107283267FD0069CF48 /* NewsEditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB2106283267FD0069CF48 /* NewsEditCell.swift */; };
+		99AB2107283267FD0069CF48 /* NewsEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB2106283267FD0069CF48 /* NewsEditView.swift */; };
 		99AB210928328E420069CF48 /* EditingProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB210828328E420069CF48 /* EditingProfileView.swift */; };
 		99AB210B283294F30069CF48 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB210A283294F30069CF48 /* NewsView.swift */; };
 		99AB210D2832953F0069CF48 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB210C2832953F0069CF48 /* UserProfileView.swift */; };
@@ -90,6 +93,9 @@
 		99536BAE282BA8370093C97C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		99536BB0282BAD590093C97C /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		99536BB2282BD34F0093C97C /* UploadPhotoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhotoRepository.swift; sourceTree = "<group>"; };
+		998B328328338E68004BA58B /* SuccessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessResponse.swift; sourceTree = "<group>"; };
+		998B328528339121004BA58B /* PostCreationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreationResponse.swift; sourceTree = "<group>"; };
+		998B32872833E6C1004BA58B /* PostCreationBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreationBody.swift; sourceTree = "<group>"; };
 		999D2F6A282E4E120064D6CE /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		99A026042822BBB300513B8D /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		99A026072822BBB300513B8D /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -97,7 +103,7 @@
 		99A34FDE2825108D0010BB43 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		99A34FE42825568F0010BB43 /* NewsLargeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsLargeCell.swift; sourceTree = "<group>"; };
 		99AB21042832483E0069CF48 /* TagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsView.swift; sourceTree = "<group>"; };
-		99AB2106283267FD0069CF48 /* NewsEditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsEditCell.swift; sourceTree = "<group>"; };
+		99AB2106283267FD0069CF48 /* NewsEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsEditView.swift; sourceTree = "<group>"; };
 		99AB210828328E420069CF48 /* EditingProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingProfileView.swift; sourceTree = "<group>"; };
 		99AB210A283294F30069CF48 /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		99AB210C2832953F0069CF48 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
@@ -224,6 +230,9 @@
 				DA841C7B282A99DE0023C582 /* AuthResponse.swift */,
 				99E3EA4D2823CE4D00068312 /* UploadPhotoResponse.swift */,
 				99E3EA452823C28400068312 /* GetNewsResponse.swift */,
+				998B328328338E68004BA58B /* SuccessResponse.swift */,
+				998B32872833E6C1004BA58B /* PostCreationBody.swift */,
+				998B328528339121004BA58B /* PostCreationResponse.swift */,
 			);
 			path = "API Service";
 			sourceTree = "<group>";
@@ -299,7 +308,7 @@
 				999D2F6A282E4E120064D6CE /* NewsCell.swift */,
 				99A34FE42825568F0010BB43 /* NewsLargeCell.swift */,
 				DA841C83282D12BC0023C582 /* NewsSmallCell.swift */,
-				99AB2106283267FD0069CF48 /* NewsEditCell.swift */,
+				99AB2106283267FD0069CF48 /* NewsEditView.swift */,
 				99AB21042832483E0069CF48 /* TagsView.swift */,
 			);
 			path = News;
@@ -618,6 +627,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				998B328628339121004BA58B /* PostCreationResponse.swift in Sources */,
 				99536BAD282BA63A0093C97C /* e_String.swift in Sources */,
 				99A0260D2822BBB300513B8D /* API.swift in Sources */,
 				DA841C86282D57F40023C582 /* SearchField.swift in Sources */,
@@ -627,7 +637,7 @@
 				99AB21052832483E0069CF48 /* TagsView.swift in Sources */,
 				99E3EA562823E74E00068312 /* RegisterView.swift in Sources */,
 				DA841C84282D12BC0023C582 /* NewsSmallCell.swift in Sources */,
-				99AB2107283267FD0069CF48 /* NewsEditCell.swift in Sources */,
+				99AB2107283267FD0069CF48 /* NewsEditView.swift in Sources */,
 				99A34FDF2825108D0010BB43 /* ImagePicker.swift in Sources */,
 				99E3EA612823F12100068312 /* UserView.swift in Sources */,
 				99536BAB282BA31D0093C97C /* AppState.swift in Sources */,
@@ -638,6 +648,7 @@
 				DA841C7C282A99DE0023C582 /* AuthResponse.swift in Sources */,
 				99536BAF282BA8370093C97C /* ProfileView.swift in Sources */,
 				99AB210928328E420069CF48 /* EditingProfileView.swift in Sources */,
+				998B328428338E68004BA58B /* SuccessResponse.swift in Sources */,
 				99E3EA422823C0C200068312 /* User.swift in Sources */,
 				99AB210D2832953F0069CF48 /* UserProfileView.swift in Sources */,
 				99E3EA652823F5B700068312 /* RegisterViewModel.swift in Sources */,
@@ -648,6 +659,7 @@
 				DA841C7E282AB06C0023C582 /* SecureTextField.swift in Sources */,
 				99E3EA6D2823F5DD00068312 /* RegisterRepository.swift in Sources */,
 				99E3EA5F2823F11400068312 /* NewsListView.swift in Sources */,
+				998B32882833E6C1004BA58B /* PostCreationBody.swift in Sources */,
 				99E3EA4E2823CE4D00068312 /* UploadPhotoResponse.swift in Sources */,
 				99E3EA632823F59900068312 /* LoginViewModel.swift in Sources */,
 				99E3EA712823F5F500068312 /* UserRepository.swift in Sources */,

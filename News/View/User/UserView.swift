@@ -11,13 +11,32 @@ struct UserView: View {
     
     @AppStorage("token") var token: String = ""
     @EnvironmentObject var appState: AppState
+    @StateObject var newsViewModel = NewsViewModel()
+    
+    @State private var editingPost: Post?
     
     var body: some View {
         if token.isEmpty {
             LoginView(viewModel: LoginViewModel(appState: appState))
         }
         else {
-            ProfileView(viewModel: UserViewModel(appState: appState))
+            VStack {
+                ProfileView(viewModel: UserViewModel(appState: appState))
+                if editingPost == nil {
+                    Button("Create post") {
+                        if let user = appState.user {
+                            let newPost = Post(id: -1, userId: user.id, title: "", text: "", image: "", username: user.name, tags: [])
+                            newsViewModel.editingPost = newPost
+                        }
+                    }
+                    .buttonStyle(BlueButton())
+                }
+                NewsListView(viewModel: newsViewModel, isEditable: true, editingPost: $editingPost)
+            }
+            .onChange(of: appState.user) { user in
+                newsViewModel.selectedUser = user
+                newsViewModel.getNews()
+            }
         }
     }
 }

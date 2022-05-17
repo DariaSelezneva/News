@@ -31,7 +31,7 @@ struct API {
     
     static let uploadFileURL = baseURL + file + uploadFile
     
-    static let getNewsURL = baseURL + news
+    static let newsURL = baseURL + news
     static let findNewsURL = baseURL + news + find
   
     static private let createNewsURL: URL = URL(string: baseURL + news)!

@@ -15,6 +15,7 @@ protocol UserRepositoryLogic {
     func updateUser(token: String, avatar: String, email: String, name: String) -> AnyPublisher<User, Error>
 }
 
+
 class UserRepository: UserRepositoryLogic {
     
     func getUser(token: String) -> AnyPublisher<User, Error> {

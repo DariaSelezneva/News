@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 protocol NewsBusinessLogic {
     
@@ -26,13 +27,10 @@ class NewsViewModel: NewsBusinessLogic, ObservableObject {
         }
     }
     
-    private let repository = NewsRepository()
+    private let newsRepository = NewsRepository()
+    private let uploadRepository: UploadPhotoRepositoryLogic = UploadPhotoRepository()
     
     private var subscriptions: Set<AnyCancellable> = []
-    
-    init() {
-        getNews()
-    }
     
     var page: Int = 1
     var perPage: Int = 10
@@ -42,19 +40,11 @@ class NewsViewModel: NewsBusinessLogic, ObservableObject {
     var selectedUser: User?
     var tags: [String] = []
     
+    @Published var editingPost: Post?
+ 
     func getNews() {
         loadingState = .loading
-        repository.getNews(page: 1, perPage: perPage)
-            .sink(receiveCompletion: receiveCompletion(_:), receiveValue: { data in
-                self.numberOfElements = data.numberOfElements
-                self.news = data.content
-            })
-            .store(in: &subscriptions)
-    }
-    
-    func findNews() {
-        loadingState = .loading
-        repository.findNews(page: 1, perPage: perPage, keywords: query, author: selectedUser?.name, tags: tags)
+        newsRepository.getNews(page: 1, perPage: perPage, keywords: query, author: selectedUser?.name, tags: tags)
             .sink(receiveCompletion: receiveCompletion(_:), receiveValue: { data in
                 self.numberOfElements = data.numberOfElements
                 self.news = data.content
@@ -66,7 +56,7 @@ class NewsViewModel: NewsBusinessLogic, ObservableObject {
         if isMore {
             loadingState = .loading
             page += 1
-            repository.findNews(page: page, perPage: perPage, keywords: query, author: selectedUser?.name, tags: tags)
+            newsRepository.getNews(page: page, perPage: perPage, keywords: query, author: selectedUser?.name, tags: tags)
                 .sink(receiveCompletion: receiveCompletion(_:), receiveValue: { data in
                     self.news.append(contentsOf: data.content)
                 })
@@ -75,10 +65,60 @@ class NewsViewModel: NewsBusinessLogic, ObservableObject {
     }
     
     func getUser(id: String) {
-        repository.getUser(id: id)
+        newsRepository.getUser(id: id)
             .sink(receiveCompletion: receiveCompletion(_:), receiveValue: { user in
                 self.selectedUser = user
-                self.findNews()
+                self.getNews()
+            })
+            .store(in: &subscriptions)
+    }
+    
+    func createPost(image: UIImage, title: String, text: String, tags: [String]) {
+        guard let token = UserDefaults.standard.string(forKey: "token"), !token.isEmpty else { return }
+        loadingState = .loading
+        uploadRepository.uploadPhoto(image)
+            .sink(receiveCompletion: receiveCompletion(_ :),
+                  receiveValue: { url in
+                self.newsRepository.createPost(imageURL: url, title: title, text: text, tags: tags, token: token)
+                    .sink(receiveCompletion: self.receiveCompletion(_:), receiveValue: { id in
+                        guard var post = self.editingPost else { return }
+                        post.id = id
+                        self.editingPost = nil
+                        self.news.insert(post, at: 0)
+                    })
+                    .store(in: &self.subscriptions)
+            })
+            .store(in: &subscriptions)
+    }
+    
+    func updatePost(id: Int, image: UIImage, title: String, text: String, tags: [String]) {
+        guard let token = UserDefaults.standard.string(forKey: "token"), !token.isEmpty else { return }
+        loadingState = .loading
+        uploadRepository.uploadPhoto(image)
+            .sink(receiveCompletion: receiveCompletion(_ :),
+                  receiveValue: { url in
+                self.newsRepository.updatePost(id: id, imageURL: url, title: title, text: text, tags: tags, token: token)
+                    .sink(receiveCompletion: self.receiveCompletion(_:), receiveValue: { success in
+                        guard let post = self.editingPost, let index = self.news.firstIndex(of: post) else { return }
+                        self.editingPost = nil
+                        self.news[index] = post
+                    })
+                    .store(in: &self.subscriptions)
+            })
+            .store(in: &subscriptions)
+    }
+    
+    func deletePost(id: Int) {
+        loadingState = .loading
+        guard let token = UserDefaults.standard.string(forKey: "token") else { return }
+        newsRepository.deletePost(id: id, token: token)
+            .sink(receiveCompletion: receiveCompletion(_:), receiveValue: { success in
+                if success {
+                    self.news = self.news.filter({ $0.id != id })
+                }
+                else {
+                    self.error = "Unknown error"
+                }
             })
             .store(in: &subscriptions)
     }

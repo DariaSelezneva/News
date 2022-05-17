@@ -21,20 +21,11 @@ struct ProfileView: View {
     @State var email: String = ""
     
     var body: some View {
-        ScrollView {
             ZStack {
                 if let user = appState.user {
                     if !isEditingUser {
-                        HStack(spacing: 12) {
-                            LoadableImage(url: Binding(get: { user.avatar }, set: { _ in }), onReceiveData: { selectedImage = $0 })
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 120, height: 120)
-                                .clipShape(Circle())
-                            VStack(alignment: .leading, spacing: 12) {
-                                Text(user.name)
-                                Text(user.email)
-                            }
-                            Spacer()
+                        ZStack(alignment: .topTrailing) {
+                            UserProfileView(imageURL: user.avatar, name: user.name, email: user.email, selectedImage: $selectedImage)
                             Button {
                                 withAnimation(.easeInOut) {
                                     isEditingUser = true
@@ -65,7 +56,6 @@ struct ProfileView: View {
                     viewModel?.getUser()
                 }
             }
-        }
         .padding()
     }
 }

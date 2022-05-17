@@ -56,6 +56,8 @@ extension User: Encodable {
     }
 }
 
+extension User: Equatable {}
+
 
 //let user = User(id: "f52bec9a-e11e-46f7-8b0f-83aa58593dca",
 //                avatar: "https://news-feed.dunice-testing.com/api/v1/file/502f5549-98ad-4db5-903b-c8d445bd4369.",

@@ -44,9 +44,3 @@ struct NewsSmallCell: View {
     }
 }
 
-struct NewsSmallCell_Previews: PreviewProvider {
-    static var previews: some View {
-        NewsSmallCell(post: Post.sample, imageURL: .constant(""), activeTags: [], onTapName: {}, onTapTag: {_ in})
-            .previewLayout(.sizeThatFits)
-    }
-}

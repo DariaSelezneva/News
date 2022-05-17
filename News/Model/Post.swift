@@ -17,9 +17,22 @@ struct Post : Identifiable {
     var username: String
     var tags: [Tag]
     
-
-    static let sample = Post(id: 1, userId: "", title: "Title", text: "Some long long multilined description, let's think what could I write here, maybe something about Doctor Who?", image: "", username: "John Smith", tags: [Tag(id: 1, title: "tag"), Tag(id: 2, title: "anothertag")])
+//    init(id: Int, userId: String, title: String, text: String, image: String, username: String, tags: [Tag]) {
+//        self.id = id
+//        self.userId = userId
+//        self.title = title
+//        self.text = text
+//        self.image = image
+//        self.username = username
+//        self.tags = tags
+//    }
     
+}
+
+extension Post: Equatable {
+    static func ==(lhs: Post, rhs: Post) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
 extension Post: Decodable {

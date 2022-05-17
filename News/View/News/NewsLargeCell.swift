@@ -38,10 +38,3 @@ struct NewsLargeCell: View {
         .background(RoundedRectangle(cornerRadius: 16).fill(Color.gray.opacity(0.1)))
     }
 }
-
-struct NewsLargeCell_Previews: PreviewProvider {
-    static var previews: some View {
-        NewsLargeCell(post: Post.sample, imageURL: .constant(""), activeTags: [], onTapName: {}, onTapTag: {_ in})
-            .previewLayout(.sizeThatFits)
-    }
-}

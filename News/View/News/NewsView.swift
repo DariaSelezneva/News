@@ -8,8 +8,29 @@
 import SwiftUI
 
 struct NewsView: View {
+    
+    @StateObject var viewModel = NewsViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            if let selectedUser = viewModel.selectedUser {
+                ZStack(alignment: .topTrailing) {
+                    UserProfileView(imageURL: selectedUser.avatar, name: selectedUser.name, email: selectedUser.email, selectedImage: .constant(UIImage()))
+                    Button {
+                        viewModel.selectedUser = nil
+                        viewModel.getNews()
+                    } label: {
+                        Image(systemName: "multiply")
+                            .font(.system(size: 24))
+                            .frame(width: 50, height: 50)
+                    }
+                }
+            }
+            NewsListView(viewModel: viewModel, isEditable: false, editingPost: .constant(nil))
+                .onAppear {
+                    viewModel.getNews()
+                }
+        }
     }
 }
 

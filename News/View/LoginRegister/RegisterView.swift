@@ -23,7 +23,7 @@ struct RegisterView: View {
     
     var body: some View {
         VStack(spacing: 30) {
-            PhotoPickerView(selectedImage: $selectedImage)
+            PhotoPickerView(selectedImage: $selectedImage, isCircle: true)
             TextField("Name", text: $name)
                 .withBackground()
             TextField("Email", text: $email)
