@@ -12,7 +12,7 @@ struct NewsCell: View {
     @ObservedObject var viewModel: NewsViewModel
     
     let post: Post
-    @Binding var imageURL: String
+    @Binding var imageURL: String?
     let activeTags: [String]
     @Binding var showsLargeCells: Bool
     
@@ -20,7 +20,7 @@ struct NewsCell: View {
     @Binding var editingPost: Post?
     
     let onTapName: () -> ()
-    let onTapTag: (Tag) -> ()
+    let onTapTag: (String) -> ()
     
     @State private var showsDeletionWarning: Bool = false
     

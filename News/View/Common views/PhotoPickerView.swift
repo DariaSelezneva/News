@@ -11,7 +11,7 @@ import Photos
 struct PhotoPickerView: View {
     
     @Binding var selectedImage: UIImage
-    var url: String?
+    @Binding var url: String?
     let isCircle: Bool
     
     @State private var photoButtonsShown: Bool = false
@@ -21,7 +21,7 @@ struct PhotoPickerView: View {
     var body: some View {
         VStack(spacing: 12) {
             if let url = url, !url.isEmpty {
-                LoadableImage(url: Binding(get: { url }, set: { _ in }), onReceiveData: { _ in })
+                LoadableImage(url: $url, onReceiveData: { image in selectedImage = image })
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 120, height: 120)
                     .clipShape(RoundedRectangle(cornerRadius: isCircle ? 60 : 12))
@@ -56,6 +56,9 @@ struct PhotoPickerView: View {
                     }
                 }
             }
+        }
+        .onChange(of: selectedImage) { selectedImage in
+            url = nil
         }
     }
 }

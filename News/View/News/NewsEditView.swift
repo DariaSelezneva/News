@@ -16,12 +16,16 @@ struct NewsEditView: View {
     let post: Post
     
     @State var image: UIImage = UIImage(named: "image-placeholder")!
+    @State var imageURL: String?
     @State var title: String = ""
     @State var text: String = ""
     
     init(viewModel: NewsViewModel, post: Post) {
         self.viewModel = viewModel
         self.post = post
+        if !post.image.isEmpty {
+            self._imageURL = State(wrappedValue: post.image)
+        }
         self._title = State(wrappedValue: post.title)
         self._text = State(wrappedValue: post.text)
         UITextView.appearance().backgroundColor = .clear
@@ -33,10 +37,11 @@ struct NewsEditView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                PhotoPickerView(selectedImage: $image, url: post.image, isCircle: false)
+                PhotoPickerView(selectedImage: $image, url: $imageURL, isCircle: false)
                     .aspectRatio(contentMode: .fill)
                 TextField("Title", text: $title)
                     .withBackground()
+                    .disableAutocorrection(true)
                 TextEditor(text: $text)
                     .frame(minHeight: 200)
                     .padding()

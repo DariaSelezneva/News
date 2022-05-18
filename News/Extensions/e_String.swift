@@ -31,3 +31,28 @@ extension String {
     }
 }
 
+extension String {
+    
+    func withoutExtraSpaces() -> String {
+        var string = self
+        while string.contains("  ") {
+            string = string.replacingOccurrences(of: "  ", with: " ")
+        }
+        while string.last == " " {
+            string.removeLast()
+        }
+        return string
+    }
+    
+    var isValidEmail: Bool {
+        let pattern = "^([A-Za-z0-9]+)([@]{1})([a-z]+)([.]{1})([a-z]+)$"
+        return self.range(of: pattern, options: .regularExpression) != nil
+    }
+    
+    var isValidPassword: Bool {
+        let pattern = "^([A-Za-z0-9]+)$"
+        let matchesRegex = self.range(of: pattern, options: .regularExpression) != nil
+        let matchesCount = self.count >= 6 && self.count <= 60
+        return matchesRegex && matchesCount
+    }
+}

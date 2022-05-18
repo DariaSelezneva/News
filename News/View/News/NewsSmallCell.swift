@@ -10,11 +10,11 @@ import SwiftUI
 struct NewsSmallCell: View {
     
     let post: Post
-    @Binding var imageURL: String
+    @Binding var imageURL: String?
     let activeTags: [String]
     
     let onTapName: () -> ()
-    let onTapTag: (Tag) -> ()
+    let onTapTag: (String) -> ()
     
     var body: some View {
         VStack {
@@ -32,8 +32,7 @@ struct NewsSmallCell: View {
                         .fontWeight(.semibold)
                         .lineLimit(1)
                     Text(post.text)
-                        .lineLimit(2)
-                    
+//                        .lineLimit(3)
                 }
                 Spacer()
             }

@@ -47,6 +47,8 @@ class LoginViewModel: LoginBusinessLogic, ObservableObject {
     
     func login(email: String, password: String) {
         appState.loadingState = .loading
+        guard email.isValidEmail else { appState.error = "Invalid email"; return }
+        guard password.isValidPassword else { appState.error = "Invalid password"; return }
         repository?.login(email: email, password: password)
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -56,7 +58,6 @@ class LoginViewModel: LoginBusinessLogic, ObservableObject {
                 case .finished: self.appState.loadingState = .success
                 }
             }, receiveValue: { authResponse in
-//                print(authResponse)
                 self.appState.user = User(id: authResponse.id, avatar: authResponse.avatar, email: authResponse.email, name: authResponse.name)
                 self.token = authResponse.token
             })

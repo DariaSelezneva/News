@@ -12,6 +12,7 @@ struct EditingProfileView: View {
     @AppStorage("token") var token: String = ""
     
     @Binding var image: UIImage
+    @Binding var imageURL: String?
     @Binding var name: String
     @Binding var email: String
     
@@ -23,7 +24,7 @@ struct EditingProfileView: View {
     var body: some View {
         ZStack(alignment: .topTrailing) {
             VStack(spacing: 12) {
-                PhotoPickerView(selectedImage: $image, isCircle: true)
+                PhotoPickerView(selectedImage: $image, url: $imageURL, isCircle: true)
                 TextField("Name", text: $name)
                     .withBackground()
                 TextField("Email", text: $email)

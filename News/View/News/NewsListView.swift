@@ -51,11 +51,11 @@ struct NewsListView: View {
                                 viewModel.getUser(id: post.userId)
                             },
                                      onTapTag: { tag in
-                                if !activeTags.contains(where: { $0 == tag.title }) {
-                                    activeTags.append(tag.title)
+                                if !activeTags.contains(where: { $0 == tag }) {
+                                    activeTags.append(tag)
                                 }
                                 else {
-                                    activeTags = activeTags.filter({$0 != tag.title })
+                                    activeTags = activeTags.filter({$0 != tag })
                                 }
                                 viewModel.tags = activeTags
                                 viewModel.getNews()

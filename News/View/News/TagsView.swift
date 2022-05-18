@@ -9,23 +9,23 @@ import SwiftUI
 
 struct TagsView: View {
     
-    let tags: [Tag]
+    let tags: [String]
     let activeTags: [String]
     
-    let onTapTag: (Tag) -> ()
+    let onTapTag: (String) -> ()
     
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
                 ForEach(tags) { tag in
-                    Text("#" + tag.title)
-                        .foregroundColor(activeTags.contains(tag.title) ? Color.white : Color.gray)
+                    Text("#\(tag)")
+                        .foregroundColor(activeTags.contains(tag) ? Color.white : Color.gray)
                         .opacity(0.8)
                         .onTapGesture {
                             onTapTag(tag)
                         }
                         .padding(.all, 3)
-                        .background(RoundedRectangle(cornerRadius: 4).fill(activeTags.contains(tag.title) ? Color.gray : Color.clear))
+                        .background(RoundedRectangle(cornerRadius: 4).fill(activeTags.contains(tag) ? Color.gray : Color.clear))
                 }
             }
         }

@@ -17,7 +17,7 @@ struct LoadableImage: View {
     
     @StateObject private var loader: Loader
     
-    @Binding var url: String
+    @Binding var url: String?
     let placeholder = UIImage(named: "image-placeholder")!
     
     let onReceiveData: (UIImage) -> ()
@@ -26,14 +26,18 @@ struct LoadableImage: View {
         selectImage()
             .resizable()
             .onAppear {
-                loader.loadImage(url: url)
+                if let url = url {
+                    loader.loadImage(url: url)
+                }
             }
             .onChange(of: url) { newValue in
-                loader.loadImage(url: newValue)
+                if let newValue = newValue {
+                    loader.loadImage(url: newValue)
+                }
             }
     }
     
-    init(url: Binding<String>, onReceiveData: @escaping (UIImage) -> ()) {
+    init(url: Binding<String?>, onReceiveData: @escaping (UIImage) -> ()) {
         self._url = url
         self.onReceiveData = onReceiveData
         _loader = StateObject(wrappedValue: Loader(onReceiveData: onReceiveData))

@@ -10,11 +10,11 @@ import SwiftUI
 struct NewsLargeCell: View {
     
     let post: Post
-    @Binding var imageURL: String
+    @Binding var imageURL: String?
     let activeTags: [String]
     
     let onTapName: () -> ()
-    let onTapTag: (Tag) -> ()
+    let onTapTag: (String) -> ()
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {

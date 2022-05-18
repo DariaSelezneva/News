@@ -74,6 +74,7 @@ class NewsViewModel: NewsBusinessLogic, ObservableObject {
     }
     
     func createPost(image: UIImage, title: String, text: String, tags: [String]) {
+        guard !title.isEmpty, !text.isEmpty else { error = "Can't save with empty fields"; return }
         guard let token = UserDefaults.standard.string(forKey: "token"), !token.isEmpty else { return }
         loadingState = .loading
         uploadRepository.uploadPhoto(image)
@@ -82,7 +83,11 @@ class NewsViewModel: NewsBusinessLogic, ObservableObject {
                 self.newsRepository.createPost(imageURL: url, title: title, text: text, tags: tags, token: token)
                     .sink(receiveCompletion: self.receiveCompletion(_:), receiveValue: { id in
                         guard var post = self.editingPost else { return }
+                        post.image = url
                         post.id = id
+                        post.title = title
+                        post.text = text
+                        post.tags = tags
                         self.editingPost = nil
                         self.news.insert(post, at: 0)
                     })
@@ -92,6 +97,7 @@ class NewsViewModel: NewsBusinessLogic, ObservableObject {
     }
     
     func updatePost(id: Int, image: UIImage, title: String, text: String, tags: [String]) {
+        guard !title.isEmpty, !text.isEmpty else { error = "Can't save with empty fields"; return }
         guard let token = UserDefaults.standard.string(forKey: "token"), !token.isEmpty else { return }
         loadingState = .loading
         uploadRepository.uploadPhoto(image)
@@ -99,7 +105,11 @@ class NewsViewModel: NewsBusinessLogic, ObservableObject {
                   receiveValue: { url in
                 self.newsRepository.updatePost(id: id, imageURL: url, title: title, text: text, tags: tags, token: token)
                     .sink(receiveCompletion: self.receiveCompletion(_:), receiveValue: { success in
-                        guard let post = self.editingPost, let index = self.news.firstIndex(of: post) else { return }
+                        guard var post = self.editingPost, let index = self.news.firstIndex(of: post) else { return }
+                        post.image = url
+                        post.title = title
+                        post.text = text
+                        post.tags = tags
                         self.editingPost = nil
                         self.news[index] = post
                     })
@@ -114,9 +124,11 @@ class NewsViewModel: NewsBusinessLogic, ObservableObject {
         newsRepository.deletePost(id: id, token: token)
             .sink(receiveCompletion: receiveCompletion(_:), receiveValue: { success in
                 if success {
+                    self.editingPost = nil
                     self.news = self.news.filter({ $0.id != id })
                 }
                 else {
+                    self.editingPost = nil
                     self.error = "Unknown error"
                 }
             })

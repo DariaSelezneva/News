@@ -262,7 +262,6 @@
 		99A34FD82824FF9B0010BB43 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				99A34FD92824FFC20010BB43 /* PhotoPickerView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -271,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				99AB210C2832953F0069CF48 /* UserProfileView.swift */,
+				99A34FD92824FFC20010BB43 /* PhotoPickerView.swift */,
 				99A34FDE2825108D0010BB43 /* ImagePicker.swift */,
 				99536BB0282BAD590093C97C /* RemoteImage.swift */,
 				DA841C81282CF96E0023C582 /* LoadableImage.swift */,

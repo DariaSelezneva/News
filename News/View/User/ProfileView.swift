@@ -17,6 +17,7 @@ struct ProfileView: View {
     @State var isEditingUser: Bool = false
     
     @State var selectedImage: UIImage = UIImage()
+    @State var imageURL: String?
     @State var name: String = ""
     @State var email: String = ""
     
@@ -40,7 +41,7 @@ struct ProfileView: View {
                         }
                     }
                     else {
-                        EditingProfileView(image: $selectedImage, name: $name, email: $email, onCancel: {
+                        EditingProfileView(image: $selectedImage, imageURL: $imageURL, name: $name, email: $email, onCancel: {
                             withAnimation(.easeInOut) {
                                 isEditingUser = false
                             }

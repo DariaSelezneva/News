@@ -14,6 +14,4 @@ struct Tag: Codable, Identifiable {
     
 }
 
-extension Tag: Equatable {
-    
-}
+extension Tag: Equatable {}

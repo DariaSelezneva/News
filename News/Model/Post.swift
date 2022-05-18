@@ -15,7 +15,7 @@ struct Post : Identifiable {
     var text: String
     var image: String
     var username: String
-    var tags: [Tag]
+    var tags: [String]
     
 //    init(id: Int, userId: String, title: String, text: String, image: String, username: String, tags: [Tag]) {
 //        self.id = id
@@ -49,7 +49,8 @@ extension Post: Decodable {
         text = try container.decode(String.self, forKey: .text)
         image = try container.decode(String.self, forKey: .image)
         username = try container.decode(String.self, forKey: .username)
-        tags = try container.decode([Tag].self, forKey: .tags)
+        let tagsWithID = try container.decode([Tag].self, forKey: .tags)
+        tags = tagsWithID.map({ $0.title })
     }
 }
 
@@ -64,6 +65,6 @@ extension Post: Encodable {
         try container.encode(title, forKey: .title)
         try container.encode(text, forKey: .text)
         try container.encode(image, forKey: .image)
-        try container.encode(tags.map({$0.title}), forKey: .tags)
+        try container.encode(tags, forKey: .tags)
     }
 }
