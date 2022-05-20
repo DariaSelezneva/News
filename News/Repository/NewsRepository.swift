@@ -51,10 +51,7 @@ class NewsRepository: NewsRepositoryLogic {
     
     
     func createPost(imageURL: String, title: String, text: String, tags: [String], token: String) -> AnyPublisher<Int, Error> {
-        let headers: HTTPHeaders = [
-                 .authorization(token),
-                 .accept("application/json")
-                ]
+        let headers: HTTPHeaders = [.authorization(token)]
         let body = PostCreationBody(image: imageURL, title: title, description: text, tags: tags)
         return AF.request(API.newsURL, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: headers)
             .validate()

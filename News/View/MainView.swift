@@ -28,7 +28,7 @@ struct MainView: View {
             }
         }
         .alert(item: $appState.error) { error in
-            Alert(title: Text("error"))
+            Alert(title: Text(error))
         }
     }
 }

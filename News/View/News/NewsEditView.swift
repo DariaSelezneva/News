@@ -60,7 +60,7 @@ struct NewsEditView: View {
                             viewModel.updatePost(id: post.id, image: image, title: title, text: text, tags: text.tags())
                         }
                     }
-                    .buttonStyle(BlueButton())
+                    .buttonStyle(AppButtonStyle())
                 }
                 Button("Delete post") {
                     showsDeletionWarning = true

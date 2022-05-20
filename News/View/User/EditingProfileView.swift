@@ -37,7 +37,7 @@ struct EditingProfileView: View {
                     Button("Save") {
                         onSave()
                     }
-                    .buttonStyle(BlueButton())
+                    .buttonStyle(AppButtonStyle())
                 }
             }
             Button("Logout") {

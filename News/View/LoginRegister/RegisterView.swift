@@ -10,44 +10,51 @@ import SwiftUI
 
 struct RegisterView: View {
     
-    let viewModel: RegisterBusinessLogic = RegisterViewModel()
+    @EnvironmentObject var appState: AppState
     
-    @State var selectedImage: UIImage = UIImage(named: "image-placeholder")!
+    @StateObject var viewModel: RegisterViewModel
     
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var confirmPassword: String = ""
-    @State private var name: String = ""
+    init(appState: AppState) {
+        _viewModel = StateObject(wrappedValue: RegisterViewModel(appState: appState))
+    }
+    
+//    @State var selectedImage: UIImage = UIImage(named: "image-placeholder")!
+//    
+//    @State private var name: String = ""
+//    @State private var email: String = ""
+//    @State private var password: String = ""
+//    @State private var confirmPassword: String = ""
     
     @State private var showsPassword: Bool = false
     
     var body: some View {
-        VStack(spacing: 30) {
-            PhotoPickerView(selectedImage: $selectedImage, url: .constant(nil), isCircle: true)
-            TextField("Name", text: $name)
-                .withBackground()
-            TextField("Email", text: $email)
-                .withBackground()
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-            VStack {
-                SecureTextField(title: "Password", text: $password, showsPassword: $showsPassword)
-                SecureTextField(title: "Confirm password", text: $confirmPassword, showsPassword: $showsPassword)
+        ScrollView {
+            VStack(spacing: 30) {
+                PhotoPickerView(selectedImage: $viewModel.selectedImage, url: .constant(nil), isCircle: true)
+                TextField("Name", text: $viewModel.name)
+                    .withBackground()
+                TextField("Email", text: $viewModel.email)
+                    .withBackground()
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                VStack {
+                    SecureTextField(title: "Password", text: $viewModel.password, showsPassword: $showsPassword)
+                    SecureTextField(title: "Confirm password", text: $viewModel.confirmPassword, showsPassword: $showsPassword)
+                }
+                Button("Register") {
+                    viewModel.register()
+                }
+//                .disabled()
+                .buttonStyle(AppButtonStyle())
             }
-            Button("Register") {
-                viewModel.register(avatar: selectedImage, email: email, name: name, password: password)
-            }
-            .foregroundColor(.white)
-            .frame(width: 150, height: 50)
-            .background(RoundedRectangle(cornerRadius: 12).fill(Color.blue))
+            .padding()
         }
-        .padding()
     }
 }
 
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterView()
+        RegisterView(appState: AppState())
     }
 }

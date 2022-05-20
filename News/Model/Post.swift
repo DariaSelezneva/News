@@ -17,16 +17,15 @@ struct Post : Identifiable {
     var username: String
     var tags: [String]
     
-//    init(id: Int, userId: String, title: String, text: String, image: String, username: String, tags: [Tag]) {
-//        self.id = id
-//        self.userId = userId
-//        self.title = title
-//        self.text = text
-//        self.image = image
-//        self.username = username
-//        self.tags = tags
-//    }
-    
+    init(id: Int, userId: String, title: String, text: String, image: String, username: String, tags: [String]) {
+        self.id = id
+        self.userId = userId
+        self.title = title
+        self.text = text
+        self.image = image
+        self.username = username
+        self.tags = tags
+    }
 }
 
 extension Post: Equatable {

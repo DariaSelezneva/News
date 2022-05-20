@@ -15,20 +15,18 @@ protocol UserBusinessLogic {
     func updateUser(avatar: UIImage, name: String, email: String)
 }
 
-class UserViewModel : UserBusinessLogic {
+final class UserViewModel : UserBusinessLogic {
     
     let appState: AppState
     
-    private var newImageURL: String?
+    init(appState: AppState) {
+        self.appState = appState
+    }
     
     private let userRepository: UserRepositoryLogic = UserRepository()
     private let uploadRepository: UploadPhotoRepositoryLogic = UploadPhotoRepository()
     
     private var subscriptions: Set<AnyCancellable> = []
-    
-    init(appState: AppState) {
-        self.appState = appState
-    }
     
     func getUser() {
         guard let token = UserDefaults.standard.string(forKey: "token"), !token.isEmpty else { return }

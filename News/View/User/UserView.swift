@@ -9,8 +9,9 @@ import SwiftUI
 
 struct UserView: View {
     
-    @AppStorage("token") var token: String = ""
     @EnvironmentObject var appState: AppState
+    @AppStorage("token") var token: String = ""
+
     @StateObject var newsViewModel = NewsViewModel()
     
     @State private var editingPost: Post?
@@ -29,11 +30,12 @@ struct UserView: View {
                             newsViewModel.editingPost = newPost
                         }
                     }
-                    .buttonStyle(BlueButton())
+                    .buttonStyle(AppButtonStyle())
                 }
                 NewsListView(viewModel: newsViewModel, isEditable: true, editingPost: $editingPost)
             }
             .onChange(of: appState.user) { user in
+                print("gets called")
                 newsViewModel.selectedUser = user
                 newsViewModel.getNews()
             }

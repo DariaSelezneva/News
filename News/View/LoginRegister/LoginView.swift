@@ -11,6 +11,8 @@ struct LoginView: View {
     
     var viewModel: LoginBusinessLogic?
     
+    @EnvironmentObject var appState: AppState
+    
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var showsPassword: Bool = false
@@ -29,9 +31,7 @@ struct LoginView: View {
                 Button("Login") {
                     viewModel?.login(email: email, password: password)
                 }
-                .foregroundColor(.white)
-                .frame(width: 150, height: 50)
-                .background(RoundedRectangle(cornerRadius: 12).fill(Color.blue))
+                .buttonStyle(AppButtonStyle()) 
                 .disabled(email.isEmpty || password.isEmpty)
             }
             VStack(spacing: 30) {
@@ -42,7 +42,7 @@ struct LoginView: View {
             }
         }
         .sheet(isPresented: $showsRegistration, content: {
-            RegisterView()
+            RegisterView(appState: appState)
         })
         .padding()
     }
@@ -50,8 +50,8 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
-        LoginView()
+        LoginView(viewModel: nil)
+        LoginView(viewModel: nil)
             .preferredColorScheme(.dark)
     }
 }

@@ -43,7 +43,7 @@ struct NewsListView: View {
                             NewsCell(viewModel: viewModel,
                                      post: post,
                                      imageURL: Binding(get: { post.image }, set: {_ in }),
-                                     activeTags: activeTags,
+                                     activeTags: viewModel.tags,
                                      showsLargeCells: $showsLargeCells,
                                      isEditable: isEditable,
                                      editingPost: $editingPost,
@@ -51,14 +51,12 @@ struct NewsListView: View {
                                 viewModel.getUser(id: post.userId)
                             },
                                      onTapTag: { tag in
-                                if !activeTags.contains(where: { $0 == tag }) {
-                                    activeTags.append(tag)
+                                if !viewModel.tags.contains(where: { $0 == tag }) {
+                                    viewModel.tags.append(tag)
                                 }
                                 else {
-                                    activeTags = activeTags.filter({$0 != tag })
+                                    viewModel.tags = viewModel.tags.filter({$0 != tag })
                                 }
-                                viewModel.tags = activeTags
-                                viewModel.getNews()
                             })
                             .onAppear {
                                 if index == viewModel.news.count - 1 {

@@ -1,15 +1,16 @@
 //
-//  AppState.swift
+//  UserDataStorage.swift
 //  News
 //
-//  Created by dunice on 11.05.2022.
+//  Created by dunice on 19.05.2022.
 //
 
-import Foundation
-import Combine
+import UIKit
+import SwiftUI
 
-
-class AppState: ObservableObject, Stateful {
+final class UserDataStorage: ObservableObject, Stateful {
+    
+    @AppStorage("token") var token: String = ""
     
     @Published var loadingState: LoadingState = .idle
     @Published var error: String? {
@@ -19,4 +20,5 @@ class AppState: ObservableObject, Stateful {
     }
     
     @Published var user: User?
+    
 }

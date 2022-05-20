@@ -12,7 +12,6 @@ import Combine
 struct NewsApp: App {
     
     let appState = AppState()
-    
     var body: some Scene {
         WindowGroup {
            MainView()

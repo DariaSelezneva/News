@@ -9,6 +9,10 @@ import Foundation
 import Combine
 import UIKit
 
+enum AppError: Error {
+    case internalError
+}
+
 protocol NewsBusinessLogic {
     
     func getNews()
@@ -16,32 +20,39 @@ protocol NewsBusinessLogic {
     func getUser(id: String)
 }
 
-class NewsViewModel: NewsBusinessLogic, ObservableObject {
+final class NewsViewModel: NewsBusinessLogic, Stateful, ObservableObject {
     
     @Published var news: [Post] = []
     
     @Published var loadingState: LoadingState = .idle
-    @Published var error: String? {
-        didSet {
-            loadingState = .error
-        }
-    }
+    @Published var error: String?
     
     private let newsRepository = NewsRepository()
     private let uploadRepository: UploadPhotoRepositoryLogic = UploadPhotoRepository()
-    
-    private var subscriptions: Set<AnyCancellable> = []
     
     var page: Int = 1
     var perPage: Int = 10
     var numberOfElements: Int = 0
     var isMore: Bool { numberOfElements > news.count }
-    var query: String?
+    @Published var query: String?
     var selectedUser: User?
-    var tags: [String] = []
+    @Published var tags: [String] = []
     
     @Published var editingPost: Post?
- 
+    
+    init() {
+        $tags
+            .flatMap({ [weak self, newsRepository] tags in
+                newsRepository.getNews(page: 1, perPage: self?.perPage ?? 10, keywords: self?.query, author: self?.selectedUser?.name, tags: tags) })
+            .sink(receiveCompletion: receiveCompletion(_:), receiveValue: { data in
+                self.numberOfElements = data.numberOfElements
+                self.news = data.content
+            })
+            .store(in: &subscriptions)
+    }
+    
+    private var subscriptions: Set<AnyCancellable> = []
+    
     func getNews() {
         loadingState = .loading
         newsRepository.getNews(page: 1, perPage: perPage, keywords: query, author: selectedUser?.name, tags: tags)
@@ -78,20 +89,16 @@ class NewsViewModel: NewsBusinessLogic, ObservableObject {
         guard let token = UserDefaults.standard.string(forKey: "token"), !token.isEmpty else { return }
         loadingState = .loading
         uploadRepository.uploadPhoto(image)
-            .sink(receiveCompletion: receiveCompletion(_ :),
-                  receiveValue: { url in
-                self.newsRepository.createPost(imageURL: url, title: title, text: text, tags: tags, token: token)
-                    .sink(receiveCompletion: self.receiveCompletion(_:), receiveValue: { id in
-                        guard var post = self.editingPost else { return }
-                        post.image = url
-                        post.id = id
-                        post.title = title
-                        post.text = text
-                        post.tags = tags
-                        self.editingPost = nil
-                        self.news.insert(post, at: 0)
-                    })
-                    .store(in: &self.subscriptions)
+            .flatMap({ [newsRepository] url in
+                newsRepository.createPost(imageURL: url, title: title, text: text, tags: tags, token: token)
+                    .map({ ($0, url) })
+            })
+            .tryMap( { [weak self] (id, url) -> Post in
+                guard let user = self?.selectedUser else { throw AppError.internalError }
+                return Post(id: id, userId: user.id, title: title, text: text, image: url, username: user.name, tags: tags)} )
+            .sink(receiveCompletion: self.receiveCompletion(_:), receiveValue: { [weak self] post in
+                self?.editingPost = nil
+                self?.news.insert(post, at: 0)
             })
             .store(in: &subscriptions)
     }
@@ -101,19 +108,18 @@ class NewsViewModel: NewsBusinessLogic, ObservableObject {
         guard let token = UserDefaults.standard.string(forKey: "token"), !token.isEmpty else { return }
         loadingState = .loading
         uploadRepository.uploadPhoto(image)
-            .sink(receiveCompletion: receiveCompletion(_ :),
-                  receiveValue: { url in
-                self.newsRepository.updatePost(id: id, imageURL: url, title: title, text: text, tags: tags, token: token)
-                    .sink(receiveCompletion: self.receiveCompletion(_:), receiveValue: { success in
-                        guard var post = self.editingPost, let index = self.news.firstIndex(of: post) else { return }
-                        post.image = url
-                        post.title = title
-                        post.text = text
-                        post.tags = tags
-                        self.editingPost = nil
-                        self.news[index] = post
-                    })
-                    .store(in: &self.subscriptions)
+            .flatMap({ [newsRepository] url in
+                newsRepository.updatePost(id: id, imageURL: url, title: title, text: text, tags: tags, token: token)
+                    .map({ ($0, url) })
+            })
+            .tryMap({ [weak self] (success, url) -> Post in
+                guard let user = self?.selectedUser else { throw AppError.internalError }
+                return Post(id: id, userId: user.id, title: title, text: text, image: url, username: user.name, tags: tags)
+            })
+            .sink(receiveCompletion: self.receiveCompletion(_:), receiveValue: { [weak self] post in
+                guard let index = self?.news.firstIndex(of: post) else { return }
+                self?.editingPost = nil
+                self?.news[index] = post
             })
             .store(in: &subscriptions)
     }
@@ -130,17 +136,10 @@ class NewsViewModel: NewsBusinessLogic, ObservableObject {
                 else {
                     self.editingPost = nil
                     self.error = "Unknown error"
+                    self.loadingState = .error
                 }
             })
             .store(in: &subscriptions)
-    }
-    
-    private func receiveCompletion(_ completion: Subscribers.Completion<Error>) {
-        switch completion {
-        case .failure(let error):
-            self.error = error.localizedDescription
-        case .finished: loadingState = .success
-        }
     }
 }
 

@@ -29,6 +29,8 @@
 		99AB210928328E420069CF48 /* EditingProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB210828328E420069CF48 /* EditingProfileView.swift */; };
 		99AB210B283294F30069CF48 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB210A283294F30069CF48 /* NewsView.swift */; };
 		99AB210D2832953F0069CF48 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB210C2832953F0069CF48 /* UserProfileView.swift */; };
+		99D4F443283625720007C971 /* p_Stateful.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D4F442283625720007C971 /* p_Stateful.swift */; };
+		99D4F44528365B210007C971 /* UserDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D4F44428365B210007C971 /* UserDataStorage.swift */; };
 		99E3EA422823C0C200068312 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA412823C0C200068312 /* User.swift */; };
 		99E3EA462823C28400068312 /* GetNewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA452823C28400068312 /* GetNewsResponse.swift */; };
 		99E3EA4A2823CAF500068312 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA492823CAF500068312 /* Post.swift */; };
@@ -54,7 +56,7 @@
 		99FCBB1228227DA800BA60DA /* NewsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCBB1128227DA800BA60DA /* NewsUITests.swift */; };
 		DA841C7C282A99DE0023C582 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA841C7B282A99DE0023C582 /* AuthResponse.swift */; };
 		DA841C7E282AB06C0023C582 /* SecureTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA841C7D282AB06C0023C582 /* SecureTextField.swift */; };
-		DA841C80282AB1E00023C582 /* BlueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA841C7F282AB1E00023C582 /* BlueButton.swift */; };
+		DA841C80282AB1E00023C582 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA841C7F282AB1E00023C582 /* AppButton.swift */; };
 		DA841C82282CF96E0023C582 /* LoadableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA841C81282CF96E0023C582 /* LoadableImage.swift */; };
 		DA841C84282D12BC0023C582 /* NewsSmallCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA841C83282D12BC0023C582 /* NewsSmallCell.swift */; };
 		DA841C86282D57F40023C582 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA841C85282D57F40023C582 /* SearchField.swift */; };
@@ -107,6 +109,8 @@
 		99AB210828328E420069CF48 /* EditingProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingProfileView.swift; sourceTree = "<group>"; };
 		99AB210A283294F30069CF48 /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		99AB210C2832953F0069CF48 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		99D4F442283625720007C971 /* p_Stateful.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = p_Stateful.swift; sourceTree = "<group>"; };
+		99D4F44428365B210007C971 /* UserDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataStorage.swift; sourceTree = "<group>"; };
 		99E3EA412823C0C200068312 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		99E3EA452823C28400068312 /* GetNewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNewsResponse.swift; sourceTree = "<group>"; };
 		99E3EA492823CAF500068312 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -139,7 +143,7 @@
 		AE9BE3F17B996873A7EAA096 /* Pods_NewsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NewsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA841C7B282A99DE0023C582 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		DA841C7D282AB06C0023C582 /* SecureTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTextField.swift; sourceTree = "<group>"; };
-		DA841C7F282AB1E00023C582 /* BlueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueButton.swift; sourceTree = "<group>"; };
+		DA841C7F282AB1E00023C582 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
 		DA841C81282CF96E0023C582 /* LoadableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableImage.swift; sourceTree = "<group>"; };
 		DA841C83282D12BC0023C582 /* NewsSmallCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSmallCell.swift; sourceTree = "<group>"; };
 		DA841C85282D57F40023C582 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
@@ -259,13 +263,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		99A34FD82824FF9B0010BB43 /* Subviews */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Subviews;
-			sourceTree = "<group>";
-		};
 		99A34FDD2825107B0010BB43 /* Common views */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,7 +272,7 @@
 				99536BB0282BAD590093C97C /* RemoteImage.swift */,
 				DA841C81282CF96E0023C582 /* LoadableImage.swift */,
 				DA841C7D282AB06C0023C582 /* SecureTextField.swift */,
-				DA841C7F282AB1E00023C582 /* BlueButton.swift */,
+				DA841C7F282AB1E00023C582 /* AppButton.swift */,
 			);
 			path = "Common views";
 			sourceTree = "<group>";
@@ -283,9 +280,8 @@
 		99E3EA532823E70A00068312 /* LoginRegister */ = {
 			isa = PBXGroup;
 			children = (
-				99A34FD82824FF9B0010BB43 /* Subviews */,
-				99E3EA552823E74E00068312 /* RegisterView.swift */,
 				99A026072822BBB300513B8D /* LoginView.swift */,
+				99E3EA552823E74E00068312 /* RegisterView.swift */,
 			);
 			path = LoginRegister;
 			sourceTree = "<group>";
@@ -351,6 +347,8 @@
 			children = (
 				99FCBAF428227DA700BA60DA /* NewsApp.swift */,
 				99536BAA282BA31D0093C97C /* AppState.swift */,
+				99D4F44428365B210007C971 /* UserDataStorage.swift */,
+				99D4F442283625720007C971 /* p_Stateful.swift */,
 				99A026032822BBB300513B8D /* API Service */,
 				99A026062822BBB300513B8D /* View */,
 				99A025FE2822BBB300513B8D /* ViewModel */,
@@ -635,11 +633,13 @@
 				99A34FE52825568F0010BB43 /* NewsLargeCell.swift in Sources */,
 				99E3EA5D2823F0D600068312 /* MainView.swift in Sources */,
 				99AB21052832483E0069CF48 /* TagsView.swift in Sources */,
+				99D4F443283625720007C971 /* p_Stateful.swift in Sources */,
 				99E3EA562823E74E00068312 /* RegisterView.swift in Sources */,
 				DA841C84282D12BC0023C582 /* NewsSmallCell.swift in Sources */,
 				99AB2107283267FD0069CF48 /* NewsEditView.swift in Sources */,
 				99A34FDF2825108D0010BB43 /* ImagePicker.swift in Sources */,
 				99E3EA612823F12100068312 /* UserView.swift in Sources */,
+				99D4F44528365B210007C971 /* UserDataStorage.swift in Sources */,
 				99536BAB282BA31D0093C97C /* AppState.swift in Sources */,
 				DAEEEE2728296A8E00BD13C3 /* RegistrationBody.swift in Sources */,
 				DA841C82282CF96E0023C582 /* LoadableImage.swift in Sources */,
@@ -655,7 +655,7 @@
 				99A34FDA2824FFC20010BB43 /* PhotoPickerView.swift in Sources */,
 				99E3EA672823F5C000068312 /* NewsViewModel.swift in Sources */,
 				99536BB3282BD34F0093C97C /* UploadPhotoRepository.swift in Sources */,
-				DA841C80282AB1E00023C582 /* BlueButton.swift in Sources */,
+				DA841C80282AB1E00023C582 /* AppButton.swift in Sources */,
 				DA841C7E282AB06C0023C582 /* SecureTextField.swift in Sources */,
 				99E3EA6D2823F5DD00068312 /* RegisterRepository.swift in Sources */,
 				99E3EA5F2823F11400068312 /* NewsListView.swift in Sources */,
