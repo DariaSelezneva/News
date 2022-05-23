@@ -10,20 +10,18 @@ import SwiftUI
 
 struct RegisterView: View {
     
-    @EnvironmentObject var appState: AppState
+//    @EnvironmentObject var appState: AppState
     
-    @StateObject var viewModel: RegisterViewModel
+//    @StateObject var viewModel: RegisterViewModel
     
-    init(appState: AppState) {
-        _viewModel = StateObject(wrappedValue: RegisterViewModel(appState: appState))
+//    init(appState: AppState) {
+//        _viewModel = StateObject(wrappedValue: RegisterViewModel(appState: appState))
+//    }
+    @ObservedObject var viewModel: UserAuthViewModel
+    
+    init(viewModel: UserAuthViewModel) {
+        self.viewModel = viewModel
     }
-    
-//    @State var selectedImage: UIImage = UIImage(named: "image-placeholder")!
-//    
-//    @State private var name: String = ""
-//    @State private var email: String = ""
-//    @State private var password: String = ""
-//    @State private var confirmPassword: String = ""
     
     @State private var showsPassword: Bool = false
     
@@ -44,17 +42,10 @@ struct RegisterView: View {
                 Button("Register") {
                     viewModel.register()
                 }
-//                .disabled()
+                .disabled(viewModel.name.isEmpty || viewModel.email.isEmpty || viewModel.password.isEmpty || viewModel.confirmPassword.isEmpty)
                 .buttonStyle(AppButtonStyle())
             }
             .padding()
         }
-    }
-}
-
-
-struct RegisterView_Previews: PreviewProvider {
-    static var previews: some View {
-        RegisterView(appState: AppState())
     }
 }

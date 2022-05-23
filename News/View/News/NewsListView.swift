@@ -11,24 +11,16 @@ struct NewsListView: View {
     
     @ObservedObject var viewModel: NewsViewModel
     
-    @State private var showsLargeCells: Bool = false
-    @State private var query: String = ""
-    @State private var activeTags: [String] = []
-    
     let isEditable: Bool
-    @Binding var editingPost: Post?
+    @State private var showsLargeCells: Bool = false
     
     var body: some View {
         VStack {
-            SearchField("Search...", text: $query)
+            SearchField("Search...", text: $viewModel.query)
             Picker("", selection: $showsLargeCells) {
                 Image(systemName: "rectangle.grid.1x2").tag(false)
                 Image(systemName: "square").tag(true)
             }
-            .onChange(of: query, perform: { query in
-                viewModel.query = query
-                viewModel.getNews()
-            })
             .pickerStyle(.segmented)
             .frame(height: 40)
             if viewModel.news.isEmpty {
@@ -46,7 +38,7 @@ struct NewsListView: View {
                                      activeTags: viewModel.tags,
                                      showsLargeCells: $showsLargeCells,
                                      isEditable: isEditable,
-                                     editingPost: $editingPost,
+                                     editingPost: $viewModel.editingPost,
                                      onTapName: {
                                 viewModel.getUser(id: post.userId)
                             },

@@ -42,11 +42,11 @@ final class RegisterViewModel: RegisterBusinessLogic {
         guard password.isValidPassword else { appState.error = "Invalid password"; return }
         appState.loadingState = .loading
         uploadRepository.uploadPhoto(selectedImage)
-            .flatMap( { [unowned self] url in ((self.registerRepository.register(avatar: url, email: self.email, name: self.name, password: self.password))) })
+            .flatMap( { [registerRepository] url in ((registerRepository.register(avatar: url, email: self.email, name: self.name, password: self.password))) })
             .sink(receiveCompletion: self.appState.receiveCompletion(_:), receiveValue: { [weak self] authResponse in
                 self?.appState.user = User(id: authResponse.id, avatar: authResponse.avatar, email: authResponse.email, name: authResponse.name)
                 self?.token = authResponse.token
-                print(authResponse)
+                self?.appState.selectedTab = 1
             })
             .store(in: &subscriptions)
     }

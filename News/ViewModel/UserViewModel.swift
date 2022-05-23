@@ -8,14 +8,12 @@
 import Foundation
 import UIKit
 import Combine
+import SwiftUI
 
-protocol UserBusinessLogic {
+
+final class UserViewModel {
     
-    func getUser()
-    func updateUser(avatar: UIImage, name: String, email: String)
-}
-
-final class UserViewModel : UserBusinessLogic {
+    @AppStorage("token") var token: String = ""
     
     let appState: AppState
     
@@ -29,7 +27,7 @@ final class UserViewModel : UserBusinessLogic {
     private var subscriptions: Set<AnyCancellable> = []
     
     func getUser() {
-        guard let token = UserDefaults.standard.string(forKey: "token"), !token.isEmpty else { return }
+        guard !token.isEmpty else { return }
         appState.loadingState = .loading
         userRepository.getUser(token: token)
             .sink(receiveCompletion: receiveCompletion(_ :),
@@ -38,17 +36,13 @@ final class UserViewModel : UserBusinessLogic {
     }
     
     func updateUser(avatar: UIImage, name: String, email: String) {
-        guard let token = UserDefaults.standard.string(forKey: "token"), !token.isEmpty else { return }
         appState.loadingState = .loading
         uploadRepository.uploadPhoto(avatar)
-            .sink(receiveCompletion: receiveCompletion(_ :),
-                  receiveValue: { url in
-                self.userRepository.updateUser(token: token, avatar: url, email: email, name: name)
-                    .sink(receiveCompletion: self.receiveCompletion(_ :),
-                          receiveValue: { self.appState.user = $0 })
-                    .store(in: &self.subscriptions)
-            })
-            .store(in: &subscriptions)
+            .flatMap({ [weak self, userRepository] url in
+                userRepository.updateUser(token: self?.token ?? "", avatar: url, email: email, name: name) })
+            .sink(receiveCompletion: self.receiveCompletion(_ :),
+                  receiveValue: { self.appState.user = $0 })
+            .store(in: &self.subscriptions)
     }
     
     private func receiveCompletion(_ completion: Subscribers.Completion<Error>) {

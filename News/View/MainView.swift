@@ -13,15 +13,17 @@ struct MainView: View {
     
     var body: some View {
         ZStack {
-            TabView {
+            TabView(selection: $appState.selectedTab) {
                 NewsView()
                     .tabItem {
                         Label("News", systemImage: "line.3.horizontal")
                     }
+                    .tag(0)
                 UserView()
                     .tabItem {
                         Label("Profile", systemImage: "person.fill")
                     }
+                    .tag(1)
             }
             if appState.loadingState == .loading {
                 ProgressView()

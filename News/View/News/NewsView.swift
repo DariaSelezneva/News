@@ -16,6 +16,7 @@ struct NewsView: View {
             if let selectedUser = viewModel.selectedUser {
                 ZStack(alignment: .topTrailing) {
                     UserProfileView(imageURL: selectedUser.avatar, name: selectedUser.name, email: selectedUser.email, selectedImage: .constant(UIImage()))
+                        .padding(.horizontal)
                     Button {
                         viewModel.selectedUser = nil
                         viewModel.getNews()
@@ -26,7 +27,7 @@ struct NewsView: View {
                     }
                 }
             }
-            NewsListView(viewModel: viewModel, isEditable: false, editingPost: .constant(nil))
+            NewsListView(viewModel: viewModel, isEditable: false)
                 .onAppear {
                     viewModel.getNews()
                 }

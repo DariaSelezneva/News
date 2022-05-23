@@ -13,14 +13,8 @@ enum AppError: Error {
     case internalError
 }
 
-protocol NewsBusinessLogic {
-    
-    func getNews()
-    func loadMore()
-    func getUser(id: String)
-}
 
-final class NewsViewModel: NewsBusinessLogic, Stateful, ObservableObject {
+final class NewsViewModel: Stateful, ObservableObject {
     
     @Published var news: [Post] = []
     
@@ -34,32 +28,48 @@ final class NewsViewModel: NewsBusinessLogic, Stateful, ObservableObject {
     var perPage: Int = 10
     var numberOfElements: Int = 0
     var isMore: Bool { numberOfElements > news.count }
-    @Published var query: String?
-    var selectedUser: User?
+    @Published var query: String = ""
+    @Published var selectedUser: User?
     @Published var tags: [String] = []
     
     @Published var editingPost: Post?
     
     init() {
+        print("NewsViewModel inited")
+        $query
+            .dropFirst()
+            .debounce(for: 0.3, scheduler: DispatchQueue.main)
+            .flatMap({ [weak self, newsRepository] query in
+                newsRepository.getNews(page: 1, perPage: self?.perPage ?? 10, keywords: query, author: self?.selectedUser?.name, tags: self?.tags) })
+            .sink(receiveCompletion: receiveCompletion(_:), receiveValue: receiveNews(_:))
+            .store(in: &subscriptions)
+//        $selectedUser
+//            .dropFirst()
+//            .flatMap({ [weak self, newsRepository] user -> AnyPublisher<DataNewsResponse, Error> in
+//                print("user")
+//                print(user)
+//                return newsRepository.getNews(page: 1, perPage: self?.perPage ?? 10, keywords: self?.query, author: user?.name, tags: self?.tags) })
+//            .sink(receiveCompletion: receiveCompletion(_:), receiveValue: receiveNews(_:))
+//            .store(in: &subscriptions)
         $tags
+            .dropFirst()
             .flatMap({ [weak self, newsRepository] tags in
                 newsRepository.getNews(page: 1, perPage: self?.perPage ?? 10, keywords: self?.query, author: self?.selectedUser?.name, tags: tags) })
-            .sink(receiveCompletion: receiveCompletion(_:), receiveValue: { data in
-                self.numberOfElements = data.numberOfElements
-                self.news = data.content
-            })
+            .sink(receiveCompletion: receiveCompletion(_:), receiveValue: receiveNews(_:))
             .store(in: &subscriptions)
     }
     
     private var subscriptions: Set<AnyCancellable> = []
     
+    private func receiveNews(_ data: DataNewsResponse) {
+        numberOfElements = data.numberOfElements
+        news = data.content
+    }
+    
     func getNews() {
         loadingState = .loading
         newsRepository.getNews(page: 1, perPage: perPage, keywords: query, author: selectedUser?.name, tags: tags)
-            .sink(receiveCompletion: receiveCompletion(_:), receiveValue: { data in
-                self.numberOfElements = data.numberOfElements
-                self.news = data.content
-            })
+            .sink(receiveCompletion: receiveCompletion(_:), receiveValue: receiveNews(_:))
             .store(in: &subscriptions)
     }
     

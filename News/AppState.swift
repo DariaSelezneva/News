@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 
 class AppState: ObservableObject, Stateful {
@@ -18,5 +19,8 @@ class AppState: ObservableObject, Stateful {
         }
     }
     
+    @AppStorage("token") var token: String = ""
+    
     @Published var user: User?
+    @Published var selectedTab: Int = 0
 }

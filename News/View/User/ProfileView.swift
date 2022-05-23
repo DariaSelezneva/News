@@ -9,10 +9,12 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @EnvironmentObject var appState: AppState
+//    @EnvironmentObject var appState: AppState
     @AppStorage("token") var token: String = ""
+    @ObservedObject var newsViewModel: NewsViewModel
+    @ObservedObject var userViewModel: UserAuthViewModel
     
-    var viewModel: UserBusinessLogic?
+//    let viewModel: UserViewModel
     
     @State var isEditingUser: Bool = false
     
@@ -23,7 +25,7 @@ struct ProfileView: View {
     
     var body: some View {
             ZStack {
-                if let user = appState.user {
+                if let user = userViewModel.user {
                     if !isEditingUser {
                         ZStack(alignment: .topTrailing) {
                             UserProfileView(imageURL: user.avatar, name: user.name, email: user.email, selectedImage: $selectedImage)
@@ -31,8 +33,8 @@ struct ProfileView: View {
                                 withAnimation(.easeInOut) {
                                     isEditingUser = true
                                 }
-                                name = appState.user?.name ?? ""
-                                email = appState.user?.email ?? ""
+                                name = userViewModel.user?.name ?? ""
+                                email = userViewModel.user?.email ?? ""
                             } label: {
                                 Image(systemName: "pencil")
                                     .font(.system(size: 24))
@@ -41,28 +43,22 @@ struct ProfileView: View {
                         }
                     }
                     else {
-                        EditingProfileView(image: $selectedImage, imageURL: $imageURL, name: $name, email: $email, onCancel: {
+                        EditingProfileView(newsViewModel: newsViewModel, userViewModel: userViewModel, image: $selectedImage, imageURL: $imageURL, name: $name, email: $email, onCancel: {
                             withAnimation(.easeInOut) {
                                 isEditingUser = false
                             }
                         }, onSave: {
-                            viewModel?.updateUser(avatar: selectedImage, name: name, email: email)
+                            userViewModel.updateUser(avatar: selectedImage, name: name, email: email)
                             isEditingUser = false
                         })
                     }
                 }
             }
             .onAppear {
-                if appState.user == nil && token != "" {
-                    viewModel?.getUser()
+                if userViewModel.user == nil && token != "" {
+                    userViewModel.getUser()
                 }
             }
         .padding()
-    }
-}
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
     }
 }

@@ -10,6 +10,9 @@ import SwiftUI
 struct EditingProfileView: View {
     
     @AppStorage("token") var token: String = ""
+//    @EnvironmentObject var appState: AppState
+    @ObservedObject var newsViewModel: NewsViewModel
+    @ObservedObject var userViewModel: UserAuthViewModel
     
     @Binding var image: UIImage
     @Binding var imageURL: String?
@@ -44,7 +47,12 @@ struct EditingProfileView: View {
                 showsLogoutWarning = true
             }
             .alert(isPresented: $showsLogoutWarning, content: {
-                Alert(title: Text("Do you want to log out?"), primaryButton: .cancel(), secondaryButton: .destructive(Text("Logout"), action: { token = "" }))
+                Alert(title: Text("Do you want to log out?"), primaryButton: .cancel(), secondaryButton: .destructive(Text("Logout"), action: {
+                    token = ""
+                    userViewModel.user = nil
+                    newsViewModel.selectedUser = nil
+                    newsViewModel.news = []
+                }))
             })
             .foregroundColor(.red)
         }

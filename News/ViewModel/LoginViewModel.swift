@@ -22,7 +22,7 @@ final class LoginViewModel: LoginBusinessLogic, ObservableObject {
     init(appState: AppState) {
         self.appState = appState
     }
-   
+    
     let repository: LoginRepositoryLogic = LoginRepository()
     
     private var subscriptions: Set<AnyCancellable> = []
@@ -33,8 +33,9 @@ final class LoginViewModel: LoginBusinessLogic, ObservableObject {
         appState.loadingState = .loading
         repository.login(email: email, password: password)
             .sink(receiveCompletion: appState.receiveCompletion(_:), receiveValue: { authResponse in
-                self.appState.user = User(id: authResponse.id, avatar: authResponse.avatar, email: authResponse.email, name: authResponse.name)
                 self.token = authResponse.token
+                self.appState.user = User(id: authResponse.id, avatar: authResponse.avatar, email: authResponse.email, name: authResponse.name)
+                self.appState.selectedTab = 1
             })
             .store(in: &subscriptions)
     }

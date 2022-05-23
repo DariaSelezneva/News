@@ -11,7 +11,8 @@ import Combine
 @main
 struct NewsApp: App {
     
-    let appState = AppState()
+    @ObservedObject var appState = AppState()
+    
     var body: some Scene {
         WindowGroup {
            MainView()

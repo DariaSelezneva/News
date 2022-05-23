@@ -13,6 +13,9 @@ protocol NewsRepositoryLogic {
     
     func getNews(page: Int, perPage: Int, keywords: String?, author: String?, tags: [String]?) -> AnyPublisher<DataNewsResponse, Error>
     func getUser(id: String) -> AnyPublisher<User, Error>
+    func createPost(imageURL: String, title: String, text: String, tags: [String], token: String) -> AnyPublisher<Int, Error>
+    func updatePost(id: Int, imageURL: String, title: String, text: String, tags: [String], token: String) -> AnyPublisher<Bool, Error>
+    func deletePost(id: Int, token: String) -> AnyPublisher<Bool, Error>
     
 }
 
@@ -22,7 +25,7 @@ class NewsRepository: NewsRepositoryLogic {
         var parameters: Parameters = [:]
         parameters["page"] = page
         parameters["perPage"] = perPage
-        if let keywords = keywords {
+        if let keywords = keywords, !keywords.isEmpty {
             parameters["keywords"] = keywords
         }
         if let author = author {
