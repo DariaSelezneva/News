@@ -10,10 +10,9 @@ import Combine
 
 struct UserView: View {
     
-    //    @EnvironmentObject var appState: AppState
+    @EnvironmentObject var appState: AppState
     @AppStorage("token") var token: String = ""
     
-    @StateObject var userViewModel = UserAuthViewModel()
     @StateObject var newsViewModel = NewsViewModel()
     
     @State private var editingPost: Post?
@@ -21,21 +20,21 @@ struct UserView: View {
     var body: some View {
         ZStack {
             if token.isEmpty {
-                LoginView(viewModel: userViewModel)
+                LoginView(appState: appState)
             }
             else {
                 VStack {
-                    ProfileView(newsViewModel: newsViewModel, userViewModel: userViewModel)
+                    ProfileView(newsViewModel: newsViewModel, viewModel: UserViewModel(appState: appState))
                     if editingPost == nil {
                         Button("Create post") {
-                            if let user = userViewModel.user {
+                            if let user = appState.user {
                                 let newPost = Post(id: -1, userId: user.id, title: "", text: "", image: "", username: user.name, tags: [])
                                 newsViewModel.editingPost = newPost
                             }
                         }
                         .buttonStyle(AppButtonStyle())
                     }
-                    if userViewModel.user != nil {
+                    if appState.user != nil {
                         NewsListView(viewModel: newsViewModel, isEditable: true)
                             .onAppear {
                                 newsViewModel.getNews()
@@ -45,7 +44,7 @@ struct UserView: View {
             }
             
         }
-        .onChange(of: userViewModel.user) { user in
+        .onChange(of: appState.user) { user in
             newsViewModel.selectedUser = user
         }
     }

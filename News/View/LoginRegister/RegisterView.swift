@@ -10,17 +10,12 @@ import SwiftUI
 
 struct RegisterView: View {
     
-//    @EnvironmentObject var appState: AppState
+    @EnvironmentObject var appState: AppState
     
-//    @StateObject var viewModel: RegisterViewModel
+    @StateObject var viewModel: RegisterViewModel
     
-//    init(appState: AppState) {
-//        _viewModel = StateObject(wrappedValue: RegisterViewModel(appState: appState))
-//    }
-    @ObservedObject var viewModel: UserAuthViewModel
-    
-    init(viewModel: UserAuthViewModel) {
-        self.viewModel = viewModel
+    init(appState: AppState) {
+        _viewModel = StateObject(wrappedValue: RegisterViewModel(appState: appState))
     }
     
     @State private var showsPassword: Bool = false

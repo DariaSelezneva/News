@@ -9,10 +9,9 @@ import SwiftUI
 
 struct LoginView: View {
     
-    @ObservedObject var viewModel: UserAuthViewModel
-    
-    init(viewModel: UserAuthViewModel) {
-        self.viewModel = viewModel
+    @StateObject var viewModel: LoginViewModel
+    init(appState: AppState) {
+        _viewModel = StateObject(wrappedValue: LoginViewModel(appState: appState))
     }
     
     @EnvironmentObject var appState: AppState
@@ -40,7 +39,7 @@ struct LoginView: View {
                 VStack(spacing: 30) {
                     Text("Haven't registered yet?")
                     NavigationLink("Register", destination: {
-                        RegisterView(viewModel: viewModel)
+                        RegisterView(appState: appState)
                     })
                 }
             }

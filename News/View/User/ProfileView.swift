@@ -9,12 +9,11 @@ import SwiftUI
 
 struct ProfileView: View {
     
-//    @EnvironmentObject var appState: AppState
+    @EnvironmentObject var appState: AppState
     @AppStorage("token") var token: String = ""
     @ObservedObject var newsViewModel: NewsViewModel
-    @ObservedObject var userViewModel: UserAuthViewModel
     
-//    let viewModel: UserViewModel
+    let viewModel: UserViewModel
     
     @State var isEditingUser: Bool = false
     
@@ -25,7 +24,7 @@ struct ProfileView: View {
     
     var body: some View {
             ZStack {
-                if let user = userViewModel.user {
+                if let user = appState.user {
                     if !isEditingUser {
                         ZStack(alignment: .topTrailing) {
                             UserProfileView(imageURL: user.avatar, name: user.name, email: user.email, selectedImage: $selectedImage)
@@ -33,8 +32,8 @@ struct ProfileView: View {
                                 withAnimation(.easeInOut) {
                                     isEditingUser = true
                                 }
-                                name = userViewModel.user?.name ?? ""
-                                email = userViewModel.user?.email ?? ""
+                                name = appState.user?.name ?? ""
+                                email = appState.user?.email ?? ""
                             } label: {
                                 Image(systemName: "pencil")
                                     .font(.system(size: 24))
@@ -43,20 +42,20 @@ struct ProfileView: View {
                         }
                     }
                     else {
-                        EditingProfileView(newsViewModel: newsViewModel, userViewModel: userViewModel, image: $selectedImage, imageURL: $imageURL, name: $name, email: $email, onCancel: {
+                        EditingProfileView(newsViewModel: newsViewModel, image: $selectedImage, imageURL: $imageURL, name: $name, email: $email, onCancel: {
                             withAnimation(.easeInOut) {
                                 isEditingUser = false
                             }
                         }, onSave: {
-                            userViewModel.updateUser(avatar: selectedImage, name: name, email: email)
+                            viewModel.updateUser(avatar: selectedImage, name: name, email: email)
                             isEditingUser = false
                         })
                     }
                 }
             }
             .onAppear {
-                if userViewModel.user == nil && token != "" {
-                    userViewModel.getUser()
+                if appState.user == nil && token != "" {
+                    viewModel.getUser()
                 }
             }
         .padding()

@@ -21,7 +21,7 @@ final class NewsViewModel: Stateful, ObservableObject {
     @Published var loadingState: LoadingState = .idle
     @Published var error: String?
     
-    private let newsRepository = NewsRepository()
+    private let newsRepository: NewsRepositoryLogic = NewsRepository()
     private let uploadRepository: UploadPhotoRepositoryLogic = UploadPhotoRepository()
     
     var page: Int = 1
@@ -35,7 +35,6 @@ final class NewsViewModel: Stateful, ObservableObject {
     @Published var editingPost: Post?
     
     init() {
-        print("NewsViewModel inited")
         $query
             .dropFirst()
             .debounce(for: 0.3, scheduler: DispatchQueue.main)
@@ -43,14 +42,6 @@ final class NewsViewModel: Stateful, ObservableObject {
                 newsRepository.getNews(page: 1, perPage: self?.perPage ?? 10, keywords: query, author: self?.selectedUser?.name, tags: self?.tags) })
             .sink(receiveCompletion: receiveCompletion(_:), receiveValue: receiveNews(_:))
             .store(in: &subscriptions)
-//        $selectedUser
-//            .dropFirst()
-//            .flatMap({ [weak self, newsRepository] user -> AnyPublisher<DataNewsResponse, Error> in
-//                print("user")
-//                print(user)
-//                return newsRepository.getNews(page: 1, perPage: self?.perPage ?? 10, keywords: self?.query, author: user?.name, tags: self?.tags) })
-//            .sink(receiveCompletion: receiveCompletion(_:), receiveValue: receiveNews(_:))
-//            .store(in: &subscriptions)
         $tags
             .dropFirst()
             .flatMap({ [weak self, newsRepository] tags in
