@@ -16,7 +16,7 @@ protocol UserRepositoryLogic {
 }
 
 
-class UserRepository: UserRepositoryLogic {
+final class UserRepository: UserRepositoryLogic {
     
     func getUser(token: String) -> AnyPublisher<User, Error> {
         let headers: HTTPHeaders = [.authorization(token)]
@@ -36,6 +36,25 @@ class UserRepository: UserRepositoryLogic {
             .publishDecodable(type: User.self, queue: .main)
             .value()
             .mapError({$0 as Error})
+            .eraseToAnyPublisher()
+    }
+}
+
+final class UserRepositoryMock: UserRepositoryLogic {
+    
+    func getUser(token: String) -> AnyPublisher<User, Error> {
+        Just(User.mock)
+            .setFailureType(to: Error.self)
+            .eraseToAnyPublisher()
+    }
+    
+    func updateUser(token: String, avatar: String, email: String, name: String) -> AnyPublisher<User, Error> {
+        var user = User.mock
+        user.avatar = avatar
+        user.email = email
+        user.name = name
+        return Just(user)
+            .setFailureType(to: Error.self)
             .eraseToAnyPublisher()
     }
 }

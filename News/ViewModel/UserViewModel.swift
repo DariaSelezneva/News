@@ -16,13 +16,14 @@ final class UserViewModel {
     @AppStorage("token") var token: String = ""
     
     let appState: AppState
+    let userRepository: UserRepositoryLogic
+    let uploadRepository: UploadPhotoRepositoryLogic
     
-    init(appState: AppState) {
+    init(appState: AppState, userRepository: UserRepositoryLogic, uploadRepository: UploadPhotoRepositoryLogic) {
         self.appState = appState
+        self.userRepository = userRepository
+        self.uploadRepository = uploadRepository
     }
-    
-    private let userRepository: UserRepositoryLogic = UserRepository()
-    private let uploadRepository: UploadPhotoRepositoryLogic = UploadPhotoRepository()
     
     private var subscriptions: Set<AnyCancellable> = []
     

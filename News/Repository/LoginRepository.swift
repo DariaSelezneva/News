@@ -15,7 +15,7 @@ protocol LoginRepositoryLogic {
     
 }
 
-class LoginRepository: LoginRepositoryLogic {
+final class LoginRepository: LoginRepositoryLogic {
     
     func login(email: String, password: String) -> AnyPublisher<AuthResponse, Error> {
         let parameters = ["email" : email, "password" : password]
@@ -25,6 +25,17 @@ class LoginRepository: LoginRepositoryLogic {
             .publishDecodable(type: AuthResponse.self, queue: .main)
             .value()
             .mapError({ $0 as Error})
+            .eraseToAnyPublisher()
+    }
+}
+
+
+final class LoginRepositoryMock: LoginRepositoryLogic {
+
+    func login(email: String, password: String) -> AnyPublisher<AuthResponse, Error> {
+        let authResponse = AuthResponse.mock(email: email)
+        return Just(authResponse)
+            .setFailureType(to: Error.self)
             .eraseToAnyPublisher()
     }
 }

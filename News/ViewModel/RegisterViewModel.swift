@@ -19,13 +19,14 @@ final class RegisterViewModel: RegisterBusinessLogic {
     @AppStorage("token") var token: String = ""
     
     let appState: AppState
+    let registerRepository: RegistrationRepositoryLogic
+    let uploadRepository: UploadPhotoRepositoryLogic
     
-    init(appState: AppState) {
+    init(appState: AppState, registerRepository: RegistrationRepositoryLogic, uploadRepository: UploadPhotoRepositoryLogic) {
         self.appState = appState
+        self.registerRepository = registerRepository
+        self.uploadRepository = uploadRepository
     }
-    
-    let registerRepository: RegistrationRepositoryLogic = RegisterRepository()
-    let uploadRepository: UploadPhotoRepositoryLogic = UploadPhotoRepository()
     
     @Published var selectedImage: UIImage = UIImage(named: "image-placeholder")!
     

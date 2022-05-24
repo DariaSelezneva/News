@@ -19,7 +19,7 @@ protocol NewsRepositoryLogic {
     
 }
 
-class NewsRepository: NewsRepositoryLogic {
+final class NewsRepository: NewsRepositoryLogic {
     
     func getNews(page: Int, perPage: Int, keywords: String? = nil, author: String? = nil, tags: [String]? = nil) -> AnyPublisher<DataNewsResponse, Error> {
         var parameters: Parameters = [:]
@@ -86,6 +86,45 @@ class NewsRepository: NewsRepositoryLogic {
             .value()
             .map({ $0.success })
             .mapError({$0 as Error})
+            .eraseToAnyPublisher()
+    }
+}
+
+
+final class NewsRepositoryMock: NewsRepositoryLogic {
+    
+    func getNews(page: Int, perPage: Int, keywords: String? = nil, author: String? = nil, tags: [String]? = nil) -> AnyPublisher<DataNewsResponse, Error> {
+        let response = DataNewsResponse(content: Post.mock, numberOfElements: Post.mock.count)
+        return Just(response)
+            .setFailureType(to: Error.self)
+            .eraseToAnyPublisher()
+    }
+    
+    func getUser(id: String) -> AnyPublisher<User, Error> {
+        var user = User.mock
+        user.id = id
+        return Just(user)
+            .setFailureType(to: Error.self)
+            .eraseToAnyPublisher()
+    }
+    
+    
+    func createPost(imageURL: String, title: String, text: String, tags: [String], token: String) -> AnyPublisher<Int, Error> {
+        Just(1)
+            .setFailureType(to: Error.self)
+            .eraseToAnyPublisher()
+    }
+    
+    
+    func updatePost(id: Int, imageURL: String, title: String, text: String, tags: [String], token: String) -> AnyPublisher<Bool, Error> {
+        Just(true)
+            .setFailureType(to: Error.self)
+            .eraseToAnyPublisher()
+    }
+    
+    func deletePost(id: Int, token: String) -> AnyPublisher<Bool, Error> {
+        Just(true)
+            .setFailureType(to: Error.self)
             .eraseToAnyPublisher()
     }
 }

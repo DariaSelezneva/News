@@ -15,7 +15,10 @@ struct RegisterView: View {
     @StateObject var viewModel: RegisterViewModel
     
     init(appState: AppState) {
-        _viewModel = StateObject(wrappedValue: RegisterViewModel(appState: appState))
+        _viewModel = StateObject(wrappedValue: RegisterViewModel(
+            appState: appState,
+            registerRepository: RegisterRepository(),
+            uploadRepository: UploadPhotoRepository()))
     }
     
     @State private var showsPassword: Bool = false

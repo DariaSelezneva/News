@@ -8,6 +8,7 @@
 import Foundation
 
 struct PostCreationResponse : Decodable {
+    
     var id: Int
     var success: Bool
     var statusCode: Int

@@ -21,8 +21,8 @@ final class NewsViewModel: Stateful, ObservableObject {
     @Published var loadingState: LoadingState = .idle
     @Published var error: String?
     
-    private let newsRepository: NewsRepositoryLogic = NewsRepository()
-    private let uploadRepository: UploadPhotoRepositoryLogic = UploadPhotoRepository()
+    let newsRepository: NewsRepositoryLogic
+    var uploadRepository: UploadPhotoRepositoryLogic?
     
     var page: Int = 1
     var perPage: Int = 10
@@ -34,7 +34,9 @@ final class NewsViewModel: Stateful, ObservableObject {
     
     @Published var editingPost: Post?
     
-    init() {
+    init(newsRepository: NewsRepositoryLogic, uploadRepository: UploadPhotoRepositoryLogic?) {
+        self.newsRepository = newsRepository
+        self.uploadRepository = uploadRepository
         $query
             .dropFirst()
             .debounce(for: 0.3, scheduler: DispatchQueue.main)
@@ -55,6 +57,7 @@ final class NewsViewModel: Stateful, ObservableObject {
     private func receiveNews(_ data: DataNewsResponse) {
         numberOfElements = data.numberOfElements
         news = data.content
+        print(news)
     }
     
     func getNews() {
@@ -89,7 +92,7 @@ final class NewsViewModel: Stateful, ObservableObject {
         guard !title.isEmpty, !text.isEmpty else { error = "Can't save with empty fields"; return }
         guard let token = UserDefaults.standard.string(forKey: "token"), !token.isEmpty else { return }
         loadingState = .loading
-        uploadRepository.uploadPhoto(image)
+        uploadRepository?.uploadPhoto(image)
             .flatMap({ [newsRepository] url in
                 newsRepository.createPost(imageURL: url, title: title, text: text, tags: tags, token: token)
                     .map({ ($0, url) })
@@ -108,7 +111,7 @@ final class NewsViewModel: Stateful, ObservableObject {
         guard !title.isEmpty, !text.isEmpty else { error = "Can't save with empty fields"; return }
         guard let token = UserDefaults.standard.string(forKey: "token"), !token.isEmpty else { return }
         loadingState = .loading
-        uploadRepository.uploadPhoto(image)
+        uploadRepository?.uploadPhoto(image)
             .flatMap({ [newsRepository] url in
                 newsRepository.updatePost(id: id, imageURL: url, title: title, text: text, tags: tags, token: token)
                     .map({ ($0, url) })

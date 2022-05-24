@@ -8,6 +8,8 @@
 import Foundation
 
 struct SuccessResponse : Decodable {
+    
     var success: Bool
     var statusCode: Int
+    
 }

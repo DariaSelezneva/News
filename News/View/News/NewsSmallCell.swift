@@ -32,7 +32,7 @@ struct NewsSmallCell: View {
                         .fontWeight(.semibold)
                         .lineLimit(1)
                     Text(post.text)
-//                        .lineLimit(3)
+                        .lineLimit(3)
                 }
                 Spacer()
             }

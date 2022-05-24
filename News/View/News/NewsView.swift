@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NewsView: View {
     
-    @StateObject var viewModel = NewsViewModel()
+    @StateObject var viewModel = NewsViewModel(newsRepository: NewsRepository(), uploadRepository: nil)
     
     var body: some View {
         VStack {

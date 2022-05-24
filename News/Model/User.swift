@@ -16,6 +16,12 @@ struct User {
     var name: String
     var role: String = "user"
     
+    #if DEBUG
+    static let mock = User(id: "23817669-18cc-4402-9707-7a49f93cbe25",
+                           avatar: "https://news-feed.dunice-testing.com/api/v1/file/693d86bf-fedd-47e8-8f00-332780ab46b8.",
+                           email: "bla@bla.com",
+                           name: "Blabla")
+    #endif
 }
 
 extension User: Decodable {

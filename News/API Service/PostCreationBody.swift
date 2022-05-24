@@ -13,5 +13,5 @@ struct PostCreationBody: Encodable {
     var title: String
     var description: String
     var tags: [String]
-    
+
 }

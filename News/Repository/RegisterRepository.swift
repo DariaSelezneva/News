@@ -15,7 +15,7 @@ protocol RegistrationRepositoryLogic {
 }
 
 
-class RegisterRepository: RegistrationRepositoryLogic {
+final class RegisterRepository: RegistrationRepositoryLogic {
     
     func register(avatar: String, email: String, name: String, password: String) -> AnyPublisher<AuthResponse, Error> {
         let parameters = ["avatar" : avatar, "email" : email, "name" : name, "password" : password, "role" : "user"]
@@ -25,6 +25,16 @@ class RegisterRepository: RegistrationRepositoryLogic {
             .publishDecodable(type: AuthResponse.self, queue: .main)
             .value()
             .mapError{$0 as Error}
+            .eraseToAnyPublisher()
+    }
+}
+
+final class RegisterRepositoryMock: RegistrationRepositoryLogic {
+    
+    func register(avatar: String, email: String, name: String, password: String) -> AnyPublisher<AuthResponse, Error> {
+        let authResponse = AuthResponse.mock(avatar: avatar, email: email, name: name)
+        return Just(authResponse)
+            .setFailureType(to: Error.self)
             .eraseToAnyPublisher()
     }
 }

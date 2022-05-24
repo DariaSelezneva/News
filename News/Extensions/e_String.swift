@@ -23,7 +23,7 @@ extension String {
     
     func tags() -> [String] {
         let range = NSRange(location: 0, length: self.utf16.count)
-        let regex = try! NSRegularExpression(pattern: "#[A-Za-z0-9]*")
+        let regex = try! NSRegularExpression(pattern: "#[A-Za-z0-9]+")
         let matches = regex.matches(in: self, options: [], range: range)
         let ranges = matches.compactMap({ Range($0.range) })
         let strings = ranges.map({ String(self[$0].dropFirst()) })

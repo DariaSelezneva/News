@@ -10,7 +10,16 @@ import Combine
 import SwiftUI
 
 
-class AppState: ObservableObject, Stateful {
+final class AppState: ObservableObject, Stateful {
+    
+    // MARK: - Stored properties
+    
+    @AppStorage("token") var token: String = ""
+    
+    @Published var user: User?
+    @Published var selectedTab: Int = 0
+    
+    // MARK: - Stateful
     
     @Published var loadingState: LoadingState = .idle
     @Published var error: String? {
@@ -18,9 +27,4 @@ class AppState: ObservableObject, Stateful {
             loadingState = .error
         }
     }
-    
-    @AppStorage("token") var token: String = ""
-    
-    @Published var user: User?
-    @Published var selectedTab: Int = 0
 }

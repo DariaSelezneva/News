@@ -16,7 +16,7 @@ protocol UploadPhotoRepositoryLogic {
     
 }
 
-class UploadPhotoRepository : UploadPhotoRepositoryLogic {
+final class UploadPhotoRepository : UploadPhotoRepositoryLogic {
     
     func uploadPhoto(_ image: UIImage) -> AnyPublisher<String, Error> {
         let jpegData = image.jpegData(compressionQuality: 0.5)!
@@ -28,6 +28,16 @@ class UploadPhotoRepository : UploadPhotoRepositoryLogic {
             .value()
             .map{$0.data}
             .mapError{$0 as Error}
+            .eraseToAnyPublisher()
+    }
+}
+
+final class UploadPhotoRepositoryMock : UploadPhotoRepositoryLogic {
+    
+    func uploadPhoto(_ image: UIImage) -> AnyPublisher<String, Error> {
+        let url = "https://news-feed.dunice-testing.com/api/v1/file/693d86bf-fedd-47e8-8f00-332780ab46b8."
+        return Just(url)
+            .setFailureType(to: Error.self)
             .eraseToAnyPublisher()
     }
 }

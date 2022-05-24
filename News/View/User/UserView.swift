@@ -13,7 +13,7 @@ struct UserView: View {
     @EnvironmentObject var appState: AppState
     @AppStorage("token") var token: String = ""
     
-    @StateObject var newsViewModel = NewsViewModel()
+    @StateObject var newsViewModel = NewsViewModel(newsRepository: NewsRepository(), uploadRepository: UploadPhotoRepository())
     
     @State private var editingPost: Post?
     
@@ -24,7 +24,11 @@ struct UserView: View {
             }
             else {
                 VStack {
-                    ProfileView(newsViewModel: newsViewModel, viewModel: UserViewModel(appState: appState))
+                    ProfileView(newsViewModel: newsViewModel,
+                                userViewModel: UserViewModel(
+                                    appState: appState,
+                                    userRepository: UserRepository(),
+                                    uploadRepository: UploadPhotoRepository()))
                     if editingPost == nil {
                         Button("Create post") {
                             if let user = appState.user {

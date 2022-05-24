@@ -13,7 +13,7 @@ struct ProfileView: View {
     @AppStorage("token") var token: String = ""
     @ObservedObject var newsViewModel: NewsViewModel
     
-    let viewModel: UserViewModel
+    let userViewModel: UserViewModel
     
     @State var isEditingUser: Bool = false
     
@@ -47,7 +47,7 @@ struct ProfileView: View {
                                 isEditingUser = false
                             }
                         }, onSave: {
-                            viewModel.updateUser(avatar: selectedImage, name: name, email: email)
+                            userViewModel.updateUser(avatar: selectedImage, name: name, email: email)
                             isEditingUser = false
                         })
                     }
@@ -55,7 +55,7 @@ struct ProfileView: View {
             }
             .onAppear {
                 if appState.user == nil && token != "" {
-                    viewModel.getUser()
+                    userViewModel.getUser()
                 }
             }
         .padding()

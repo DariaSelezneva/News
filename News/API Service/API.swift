@@ -9,6 +9,8 @@ import Foundation
 
 struct API {
     
+    // MARK: - Strings
+    
     static private let baseURL = "https://news-feed.dunice-testing.com/api/v1"
     
     static private let auth = "/auth"
@@ -33,13 +35,6 @@ struct API {
     
     static let newsURL = baseURL + news
     static let findNewsURL = baseURL + news + find
-  
-    static private let createNewsURL: URL = URL(string: baseURL + news)!
-    static private func newsURL(id: Int) -> URL { URL(string: baseURL + news + "/\(id)")! }
-
-    static private func userNewsURL(userID: Int) -> URL {
-        URL(string: baseURL + news + user + "/\(userID)")!
-    }
     
     static let userURL = baseURL + user
     static let getUserInfoURL = baseURL + user + info
