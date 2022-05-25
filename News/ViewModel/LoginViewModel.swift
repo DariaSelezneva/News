@@ -36,7 +36,6 @@ final class LoginViewModel: LoginBusinessLogic, ObservableObject {
         appState.loadingState = .loading
         repository.login(email: email, password: password)
             .sink(receiveCompletion: appState.receiveCompletion(_:), receiveValue: { [weak self] authResponse in
-                print(authResponse)
                 self?.token = authResponse.token
                 self?.appState.user = User(id: authResponse.id, avatar: authResponse.avatar, email: authResponse.email, name: authResponse.name)
                 self?.appState.selectedTab = 1

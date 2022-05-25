@@ -8,6 +8,11 @@
 import Foundation
 import SwiftUI
 import Combine
+import UIKit
+
+class Cache {
+    static let shared = NSCache<NSString, UIImage>()
+}
 
 struct LoadableImage: View {
     
@@ -57,19 +62,27 @@ struct LoadableImage: View {
         }
         
         func loadImage(url: String) {
-            state = .loading
-            guard let url = URL(string: url) else { return }
-            URLSession.shared.dataTaskPublisher(for: url)
-                .receive(on: DispatchQueue.main)
-                .map { UIImage(data: $0.data) }
-                .replaceNil(with: UIImage(named: "image-placeholder")!)
-                .sink { _ in } receiveValue: { image in
-                    self.state = .success
-                    self.onReceiveData(image)
-                    self.image = image
-                    self.objectWillChange.send()
-                }
-                .store(in: &subscriptions)
+            if let cachedImage = Cache.shared.object(forKey: NSString(string: url)) {
+                self.image = cachedImage
+                self.state = .success
+                self.objectWillChange.send()
+            }
+            else {
+                state = .loading
+                guard let actualUrl = URL(string: url) else { return }
+                URLSession.shared.dataTaskPublisher(for: actualUrl)
+                    .receive(on: DispatchQueue.main)
+                    .map { UIImage(data: $0.data) }
+                    .replaceNil(with: UIImage(named: "image-placeholder")!)
+                    .sink { _ in } receiveValue: { receivedImage in
+                        self.state = .success
+                        self.onReceiveData(receivedImage)
+                        self.image = receivedImage
+                        Cache.shared.setObject(receivedImage, forKey: NSString(string: url))
+                        self.objectWillChange.send()
+                    }
+                    .store(in: &subscriptions)
+            }
         }
     }
     

@@ -57,7 +57,6 @@ final class NewsViewModel: Stateful, ObservableObject {
     private func receiveNews(_ data: DataNewsResponse) {
         numberOfElements = data.numberOfElements
         news = data.content
-        print(news)
     }
     
     func getNews() {
