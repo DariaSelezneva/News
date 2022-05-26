@@ -27,18 +27,21 @@ struct LoginView: View {
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         .keyboardType(.emailAddress)
+                        .accessibilityIdentifier("LoginEmailTextField")
                     SecureTextField(title: "Password", text: $viewModel.password, showsPassword: $showsPassword)
                     Button("Login") {
                         viewModel.login()
                     }
                     .buttonStyle(AppButtonStyle())
                     .disabled(viewModel.email.isEmpty || viewModel.password.isEmpty)
+                    .accessibilityIdentifier("LoginButton")
                 }
                 VStack(spacing: 30) {
                     Text("Haven't registered yet?")
                     NavigationLink("Register", destination: {
                         RegisterView(appState: appState)
                     })
+                    .accessibilityIdentifier("ShowRegistrationButton")
                 }
             }
             .padding()

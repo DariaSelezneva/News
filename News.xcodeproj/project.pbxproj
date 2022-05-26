@@ -38,6 +38,8 @@
 		99AB210928328E420069CF48 /* EditingProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB210828328E420069CF48 /* EditingProfileView.swift */; };
 		99AB210B283294F30069CF48 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB210A283294F30069CF48 /* NewsView.swift */; };
 		99AB210D2832953F0069CF48 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB210C2832953F0069CF48 /* UserProfileView.swift */; };
+		99B4562D283F7A8F001F370D /* RegisterView_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B4562C283F7A8F001F370D /* RegisterView_UITests.swift */; };
+		99B4562F283F7F83001F370D /* p_TypingTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B4562E283F7F83001F370D /* p_TypingTester.swift */; };
 		99D4F443283625720007C971 /* p_Stateful.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D4F442283625720007C971 /* p_Stateful.swift */; };
 		99E3EA422823C0C200068312 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA412823C0C200068312 /* User.swift */; };
 		99E3EA462823C28400068312 /* GetNewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E3EA452823C28400068312 /* GetNewsResponse.swift */; };
@@ -60,7 +62,7 @@
 		99FCBAF528227DA700BA60DA /* NewsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCBAF428227DA700BA60DA /* NewsApp.swift */; };
 		99FCBAF928227DA800BA60DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99FCBAF828227DA800BA60DA /* Assets.xcassets */; };
 		99FCBAFC28227DA800BA60DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99FCBAFB28227DA800BA60DA /* Preview Assets.xcassets */; };
-		99FCBB1228227DA800BA60DA /* NewsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCBB1128227DA800BA60DA /* NewsUITests.swift */; };
+		99FCBB1228227DA800BA60DA /* LoginView_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FCBB1128227DA800BA60DA /* LoginView_UITests.swift */; };
 		DA841C7C282A99DE0023C582 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA841C7B282A99DE0023C582 /* AuthResponse.swift */; };
 		DA841C7E282AB06C0023C582 /* SecureTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA841C7D282AB06C0023C582 /* SecureTextField.swift */; };
 		DA841C80282AB1E00023C582 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA841C7F282AB1E00023C582 /* AppButton.swift */; };
@@ -125,6 +127,8 @@
 		99AB210828328E420069CF48 /* EditingProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingProfileView.swift; sourceTree = "<group>"; };
 		99AB210A283294F30069CF48 /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		99AB210C2832953F0069CF48 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		99B4562C283F7A8F001F370D /* RegisterView_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView_UITests.swift; sourceTree = "<group>"; };
+		99B4562E283F7F83001F370D /* p_TypingTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = p_TypingTester.swift; sourceTree = "<group>"; };
 		99D4F442283625720007C971 /* p_Stateful.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = p_Stateful.swift; sourceTree = "<group>"; };
 		99E3EA412823C0C200068312 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		99E3EA452823C28400068312 /* GetNewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNewsResponse.swift; sourceTree = "<group>"; };
@@ -152,7 +156,7 @@
 		99FCBB0228227DA800BA60DA /* NewsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		99FCBB0828227DA800BA60DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		99FCBB0D28227DA800BA60DA /* NewsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		99FCBB1128227DA800BA60DA /* NewsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsUITests.swift; sourceTree = "<group>"; };
+		99FCBB1128227DA800BA60DA /* LoginView_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView_UITests.swift; sourceTree = "<group>"; };
 		99FCBB1328227DA800BA60DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE9BE3F17B996873A7EAA096 /* Pods_NewsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NewsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA841C7B282A99DE0023C582 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
@@ -427,7 +431,9 @@
 		99FCBB1028227DA800BA60DA /* NewsUITests */ = {
 			isa = PBXGroup;
 			children = (
-				99FCBB1128227DA800BA60DA /* NewsUITests.swift */,
+				99B4562E283F7F83001F370D /* p_TypingTester.swift */,
+				99FCBB1128227DA800BA60DA /* LoginView_UITests.swift */,
+				99B4562C283F7A8F001F370D /* RegisterView_UITests.swift */,
 				99FCBB1328227DA800BA60DA /* Info.plist */,
 			);
 			path = NewsUITests;
@@ -740,7 +746,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99FCBB1228227DA800BA60DA /* NewsUITests.swift in Sources */,
+				99FCBB1228227DA800BA60DA /* LoginView_UITests.swift in Sources */,
+				99B4562F283F7F83001F370D /* p_TypingTester.swift in Sources */,
+				99B4562D283F7A8F001F370D /* RegisterView_UITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

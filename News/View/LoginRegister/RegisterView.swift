@@ -29,10 +29,12 @@ struct RegisterView: View {
                 PhotoPickerView(selectedImage: $viewModel.selectedImage, url: .constant(nil), isCircle: true)
                 TextField("Name", text: $viewModel.name)
                     .withBackground()
+                    .accessibilityIdentifier("RegisterNameTextField")
                 TextField("Email", text: $viewModel.email)
                     .withBackground()
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
+                    .accessibilityIdentifier("RegisterEmailTextField")
                 VStack {
                     SecureTextField(title: "Password", text: $viewModel.password, showsPassword: $showsPassword)
                     SecureTextField(title: "Confirm password", text: $viewModel.confirmPassword, showsPassword: $showsPassword)
@@ -40,8 +42,14 @@ struct RegisterView: View {
                 Button("Register") {
                     viewModel.register()
                 }
-                .disabled(viewModel.name.isEmpty || viewModel.email.isEmpty || viewModel.password.isEmpty || viewModel.confirmPassword.isEmpty)
+                .disabled(viewModel.name.isEmpty ||
+                          viewModel.email.isEmpty ||
+                          viewModel.password.isEmpty ||
+                          viewModel.confirmPassword.isEmpty ||
+                          viewModel.password != viewModel.confirmPassword
+                )
                 .buttonStyle(AppButtonStyle())
+                .accessibilityIdentifier("RegisterButton")
             }
             .padding()
         }

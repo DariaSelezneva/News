@@ -39,6 +39,7 @@ struct ProfileView: View {
                                     .font(.system(size: 24))
                                     .frame(width: 50, height: 50)
                             }
+                            .accessibilityIdentifier("EditProfileButton")
                         }
                     }
                     else {

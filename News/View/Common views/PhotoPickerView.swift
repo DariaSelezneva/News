@@ -37,6 +37,7 @@ struct PhotoPickerView: View {
                     photoButtonsShown.toggle()
                 }
             }
+            .accessibilityIdentifier("PhotoPickerButton")
             if photoButtonsShown {
                 HStack(spacing: 30) {
                     Button("Camera") {
@@ -46,6 +47,7 @@ struct PhotoPickerView: View {
                     .sheet(isPresented: $showsCamera) {
                         ImagePicker(sourceType: .camera, selectedImage: $selectedImage)
                     }
+                    .accessibilityIdentifier("CameraButton")
                     Button("Library") {
                         showsLibrary = true
                     }
@@ -53,6 +55,7 @@ struct PhotoPickerView: View {
                     .sheet(isPresented: $showsLibrary) {
                         ImagePicker(sourceType: .photoLibrary, selectedImage: $selectedImage)
                     }
+                    .accessibilityIdentifier("PhotoLibraryButton")
                 }
             }
         }

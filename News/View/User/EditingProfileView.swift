@@ -54,6 +54,7 @@ struct EditingProfileView: View {
                 }))
             })
             .foregroundColor(.red)
+            .accessibilityIdentifier("LogoutButton")
         }
     }
 }

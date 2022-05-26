@@ -20,12 +20,14 @@ struct SecureTextField: View {
                     .withBackground()
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
+                    .accessibilityIdentifier("PasswordTextField")
             }
             else {
                 SecureField(title, text: $text)
                     .withBackground()
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
+                    .accessibilityIdentifier("SecureTextField")
             }
             HStack {
                 Spacer()
@@ -35,6 +37,7 @@ struct SecureTextField: View {
                     Image(systemName: showsPassword ? "eye.slash" : "eye")
                 }
                 .frame(width: 48, height: 48)
+                .accessibilityIdentifier("eyeButton")
             }
         }
     }
