@@ -39,3 +39,4 @@ final class LoginRepositoryMock: LoginRepositoryLogic {
             .eraseToAnyPublisher()
     }
 }
+
