@@ -61,9 +61,6 @@ struct NewsListView: View {
             }
         }
         .padding()
-        .sheet(item: $viewModel.editingPost) { editingPost in
-            NewsEditView(viewModel: viewModel, post: editingPost)
-            
-        }
+        
     }
 }

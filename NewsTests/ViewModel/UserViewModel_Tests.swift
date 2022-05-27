@@ -47,4 +47,18 @@ class UserViewModel_Tests: XCTestCase {
         XCTAssertNotNil(appState.error)
         XCTAssertEqual(appState.error, "Can't save with empty fields")
     }
+    
+    func test_UserViewModel_userUpdateFailsWithInvalidEmail() {
+        // Given
+        let appState = AppState()
+        let vm = UserViewModel(appState: appState, userRepository: UserRepositoryMock(), uploadRepository: UploadPhotoRepositoryMock())
+        UserDefaults.standard.set(AuthResponse.mock.token, forKey: "token")
+        appState.user = User.mock
+        // When
+        vm.updateUser(avatar: UIImage(), name: "NewName", email: "newEmailbla.com")
+        // Then
+        XCTAssertNotEqual(appState.user?.name, "NewName")
+        XCTAssertNotNil(appState.error)
+        XCTAssertEqual(appState.error, "Invalid email")
+    }
 }

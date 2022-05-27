@@ -83,6 +83,7 @@ class NewsViewModel_Tests: XCTestCase {
         // Then
         XCTAssertNotEqual(vm.news.last!.title, "NewTitle")
         XCTAssertNotNil(vm.error)
+        XCTAssertEqual(vm.error, "Can't save with empty fields")
     }
     
     func test_NewsViewModel_deletesPost() {

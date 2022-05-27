@@ -38,6 +38,7 @@ final class UserViewModel {
     
     func updateUser(avatar: UIImage, name: String, email: String) {
         guard !name.isEmpty, !email.isEmpty else { appState.error = "Can't save with empty fields"; return }
+        guard email.isValidEmail else { appState.error = "Invalid email"; return }
         appState.loadingState = .loading
         uploadRepository.uploadPhoto(avatar)
             .flatMap({ [weak self, userRepository] url in

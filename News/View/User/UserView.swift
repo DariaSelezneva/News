@@ -48,6 +48,9 @@ struct UserView: View {
             }
             
         }
+        .sheet(item: $newsViewModel.editingPost) { editingPost in
+            NewsEditView(viewModel: newsViewModel, post: editingPost)
+        }
         .onChange(of: appState.user) { user in
             newsViewModel.selectedUser = user
         }

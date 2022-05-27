@@ -38,7 +38,6 @@ final class NewsViewModel: Stateful, ObservableObject {
         self.newsRepository = newsRepository
         self.uploadRepository = uploadRepository
         $query
-            .dropFirst()
             .debounce(for: 0.3, scheduler: DispatchQueue.main)
             .flatMap({ [weak self, newsRepository] query in
                 newsRepository.getNews(page: 1, perPage: self?.perPage ?? 10, keywords: query, author: self?.selectedUser?.name, tags: self?.tags) })
