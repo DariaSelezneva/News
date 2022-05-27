@@ -224,6 +224,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		998E04C42840A569005C7563 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		999A7FC6283CC3EA00F2BA63 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,6 +348,7 @@
 		99E3EA572823E8E900068312 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				998E04C42840A569005C7563 /* New Group */,
 				99E3EA582823E90000068312 /* e_TextField.swift */,
 				99536BAC282BA63A0093C97C /* e_String.swift */,
 			);

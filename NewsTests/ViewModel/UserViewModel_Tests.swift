@@ -6,30 +6,45 @@
 //
 
 import XCTest
+@testable import News
 
 class UserViewModel_Tests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func test_UserViewModel_shouldGetUser() {
+        // Given
+        let appState = AppState()
+        let vm = UserViewModel(appState: appState, userRepository: UserRepositoryMock(), uploadRepository: UploadPhotoRepositoryMock())
+        UserDefaults.standard.set(AuthResponse.mock.token, forKey: "token")
+        // When
+        vm.getUser()
+        // Then
+        XCTAssertNotNil(appState.user)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func test_UserViewModel_shouldUpdateUser() {
+        // Given
+        let appState = AppState()
+        let vm = UserViewModel(appState: appState, userRepository: UserRepositoryMock(), uploadRepository: UploadPhotoRepositoryMock())
+        UserDefaults.standard.set(AuthResponse.mock.token, forKey: "token")
+        appState.user = User.mock
+        // When
+        vm.updateUser(avatar: UIImage(), name: "NewName", email: "newEmail@bla.com")
+        // Then
+        XCTAssertEqual(appState.user?.name, "NewName")
+        XCTAssertEqual(appState.user?.email, "newEmail@bla.com")
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func test_UserViewModel_userUpdateFailsWithEmptyFields() {
+        // Given
+        let appState = AppState()
+        let vm = UserViewModel(appState: appState, userRepository: UserRepositoryMock(), uploadRepository: UploadPhotoRepositoryMock())
+        UserDefaults.standard.set(AuthResponse.mock.token, forKey: "token")
+        appState.user = User.mock
+        // When
+        vm.updateUser(avatar: UIImage(), name: "", email: "newEmail@bla.com")
+        // Then
+        XCTAssertNotEqual(appState.user?.email, "newEmail@bla.com")
+        XCTAssertNotNil(appState.error)
+        XCTAssertEqual(appState.error, "Can't save with empty fields")
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }

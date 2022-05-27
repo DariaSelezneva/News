@@ -6,8 +6,6 @@
 //
 
 import XCTest
-
-import XCTest
 @testable import News
 
 class RegisterViewModel_Tests: XCTestCase {
